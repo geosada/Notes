@@ -2,7 +2,3 @@
 ---
 
 @import 'jekyll-theme-cayman-blog';
-.centered {
-    text-align: center;
-}
-
