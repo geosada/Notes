@@ -4,98 +4,89 @@ title: "Intuition behind Gaussian isoperimetric inequality"
 ---
 Some of the intuition behind the theorem of Gaussian Isoperimetric Inequality that I have will be presented in this post.
 
-## Isoperimetric Inequality and $\epsilon$-expansion
+## Isoperimetric Inequality and $\epsilon$-extension
 Before considering the Gaussian measure, we begin with something simpler.
 As the word $\textit{isoperimetric}$ implies, let us imagin that we have two strings that are identical in perimeter, i.e., equal in length,
 and think about making shapes by enclosing them.
-Countless shapes can be created, but which of them maximizes the area enclosed by the string? 
+Countless shapes can be made, but which of them maximizes the area enclosed by the string? 
+
+![Circle maximizes the area]({{site.baseurl}}/img/GII/fig_ii.png){: .centered width="400" }
+
 It is a circle, $A_{2}$.
+I don't think this is necessarily obvious to everyone, and in fact, 
+I would say I believed it more than I understood it, but I managed to convince myself 
+with the [Wikipedia](https://en.wikipedia.org/wiki/Isoperimetric_inequality) explanation that a drop of water becomes a sphere. 
+
 We fixed the length of the strings in this example, but now we assume that the strings are stretchable, 
 and instead, we fix the area inside the enclosure; I mean $\mu(A_{1}) = \mu(A_{2})$, where $\mu(A)$ is the area of $A$.
 In this case, which length of the string is shorter, $A_{1}$ or $A_{2}$?
-No surprise, it is A2.
-It is saying that if the areas are equal, the perimeter will be the smallest when forming a circle.
-
-We show an application of Gaussian isoperimetric inequality to concentration inequalities of Lipschitz functions.
-Suppose $ f: \mathcal{X} \mapsto \mathbb{R}$ is $L$-Lipschitz function where $\mathcal{X} \subset \mathbb{R}^n$,
-for all $x,y \in \mathcal{X}$,
+If the water drop story makes sense to us, then no surprise about this, it is $A_{2}$,
+saying that if the areas are equal, the perimeter will be the smallest when forming a circle.
+Let us express this a little more formally.
+The perimeter is defined as
 \[
-    \| f(x) - f(y) \| \leq L \lVert x - y \rVert_{2}.
+    \text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
 \]
-It is saying that to pull $f(x)$ and $f(y)$ apart $\epsilon$, $x$ and $y$ need to be pulled apart as much or more than $L \epsilon$.
-
-![Lipschitz function]({{site.baseurl}}/img/GII/fig_lipschitz.png){: .centered width="500" }
-
-## Connecting Lipschitz continuity to $\epsilon$-expansion
-For simplicity, let $L=1$ from here on.
-Letting $A \subset \mathcal{X}$ and $y \in A$, we consider $\epsilon$-expansion of $A$, $A_{\epsilon}$.
-Then, we have 
+We introduce the notion of $\epsilon$-extension, and the $\epsilon$-extension of $A$ is denoted by $\mu(A_{\epsilon}$, which is defined as 
 \[
-     \\{ x: f(x) -f(y) \geq \epsilon  \\} \subseteq \\{ x: d(x, A) \geq \epsilon \\} \label{eq:1}\tag{1},
+    A_{\epsilon} =\\{ x: d(x, A) \leq \epsilon \\}
 \]
 where $d(x,A)$ denotes the distance from $x$ to the nearest point in $A$.
-This relationship can be easily understood by drawing a figure like the one below.
+It is just saying that $A_{\epsilon}$ is $A$ blown up by a small $\epsilon$, like below.
 
-![$\epsilon$-expansion of $A$]({{site.baseurl}}/img/GII/fig_a_ep.png){: .centered width="400" }
+![$A_{\epsilon}$]({{site.baseurl}}/img/GII/fig_ii_extension.png){: .centered width="400" }
 
-The figure depicts the entire $\mathcal{X}$.
-The area enclosed by the light blue line is $A_{\epsilon}$.
-The yellow area outside of $A_{\epsilon}$ is $A_{\epsilon}^{c}$,
-which corresponds to $\\{ x: d(x, A) \geq \epsilon \\}$ on the right-hand side in Eq.$\,$($\ref{eq:1}$);
-the shaded area in $A_{\epsilon}^{c}$ corresponds to $\\{ x: f(x) -f(y) \geq \epsilon \\}$ on the left-hand side in Eq.$\,$($\ref{eq:1}$).
+The isoperimetric inequality says $\text{surf}(A_{1}) \geq \text{surf}(A_{2})$. 
 
-## Concentration of Lipschitz function on its median
-Now, we impose one condition on $A$ as
-\[
-    A = \\{ y: f(y) \leq M \\}
-\]
-where $M$ denotes the median of $f(X)$ and $X$ is a random variable following the distribution $\mathbb{P}$ on $\mathcal{X}$.
+## In Gaussian measure
+Instead of the area $\mu$ earlier, we consider the gaussian measure $\gamma$.
+![Gaussian measure]({{site.baseurl}}/img/GII/fig_gaussian_measure.png){: .centered width="300" }
 
-![Median of $f(X)$]({{site.baseurl}}/img/GII/fig_median_f.png){: .centered width="500" }
-
-The mountainous one on the bottom is a histogram of $f(X)$.
-Since $f(x) \leq M$, we can bound Eq.$\,$($\ref{eq:1}$) as
-\[
-     \\{ x: f(x) - M \geq \epsilon  \\} \subseteq \\{ x: f(x) -f(y) \geq \epsilon  \\} \subseteq \\{ x: d(x, A) \geq \epsilon \\}.
-\]
-Rewriting the above equation in probability measure, we obtain
-\[
-    \mathbb{P}(f(x) - M \geq \epsilon ) \leq \mathbb{P}( d(x, A) \geq \epsilon) = \mathbb{P}(A_{\epsilon}^{c}) \label{eq:2}\tag{2}.
-\]
-Defining $\alpha(\epsilon) := \sup_{A \subset \mathcal{X}, \mathbb{P}(A) \geq \frac{1}{2}} \mathbb{P}( d(x, A) \geq \epsilon)$, which is called the concentration function, we bound the left-hand side as
-\[
-    \mathbb{P}(f(x) - M \geq \epsilon ) \leq \alpha(\epsilon).
-\]
-It is saying that $\alpha(\epsilon)$ tells us that how fast $f$ concentrates on its median $M$.
-
-## Concentration on Gaussian measure
-If we consider the situation where $\mathbb{P}$ is Gaussian measure $\gamma$, we can embody $\alpha(\epsilon)$.
-As the RHS of Eq.$\,$($\ref{eq:2}$) can be written as $\mathbb{P}(A_{\epsilon}^{c}) = 1 - \mathbb{P}(A_{\epsilon})$, we have
-\[
-    \mathbb{P}(f(x) - M \geq \epsilon ) \leq 1 - \gamma(A_{\epsilon}) = 1 - \gamma(A + \epsilon B).
-\]
-Applying the CDF of Gaussian $\Phi$ to both sides of Gaussian Isoperimetric Inequality as,
+$\gamma(A)$ is something like the density assigned to the entire region $A$ in the Gaussian distribution in $n$-dimensional space.
+The closer $A$ is to the mean, the larger $\gamma(A)$ becomes.
+As before, $\epsilon$-extension of $A$ is $A_{\epsilon} = A + \epsilon B_{n}$, where $B_{n}$ is an unit ball in $n$ dimension space.
+Then, Gaussian isoperimetric inequality says
 \[ 
-    \Phi ( \Phi^{-1} ( \gamma(A + \epsilon B))) \geq \Phi ( \Phi^{-1} ( \gamma(A)) + \epsilon ),
-\]we obtain
-\[
-    \gamma(A + \epsilon B) \geq \gamma(A)) + \Phi (\epsilon).
-\] 
-Thus,
-\[
-    \mathbb{P}(f(x) - M \geq \epsilon ) \leq 1 - \gamma(A + \epsilon B) \leq 1- (\gamma(A) + \Phi (\epsilon)).
+    \Phi^{-1} ( \gamma(A + \epsilon B_{n})) \geq \Phi^{-1} ( \gamma(A)) + \epsilon, \label{eq:1}\tag{1}
 \]
-Recall that $A = \\{ y: f(y) \leq M \\}$, and 
-the shape of histogram I drew above is Gaussian (since we consider Gaussian measure), we have $\gamma(A) = \frac{1}{2}$.
-Therefore,
-\[
-    1- (\gamma(A) + \Phi (\epsilon)) = \frac{1}{2} - \Phi (\epsilon) \leq 1 - \Phi (\epsilon) = \Phi (- \epsilon).
+where $\Phi$ is the CDF of Gaussian.
+It is saying that $\epsilon$-extension of $A$ makes the yellow line longer than $\epsilon$ in the following.
+
+![Gaussian isoperimetric inequality]({{site.baseurl}}/img/GII/fig_gii.png){: .centered width="500" }
+
+We saw that, when $A \subset \mathbb{R}^{2}$ is a circle, the length of the string is the shortest,
+which means that the variation due to $\epsilon$-extension is minimum.
+In Gaussian measure, when $A$ is the half space $H = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a \\}$, the change due to $\epsilon$-extension is minimum,
+i.e., $\gamma(A + \epsilon B_{n}) \geq \gamma(H + \epsilon B_{n})$ for all $A$.
+
+It is difficult to get an intuition as to all this, but let me leave this for now and move on.
+We show that when $A = H$, the equality holds in Eq.$\,$($\ref{eq:1}$), i.e., 
+\[ 
+    \Phi^{-1} ( \gamma(H + \epsilon B_{n})) = \Phi^{-1} ( \gamma(H)) + \epsilon.
 \]
-As 
-\[
-    \Phi (- \epsilon) = \frac{1}{\sqrt{2\pi}} \int_{\epsilon}^{\infty} \exp (-\frac{u^{2}}{2})du \leq \exp (-\frac{\epsilon^{2}}{2}),
+Here, we use the property that an orthogonal projection of a multidimensional Gaussian into one dimension becomes a $1$-dimensional Gaussian.
+
+![Projection of Gaussian]({{site.baseurl}}/img/GII/fig_projected_gauss.png){: .centered width="400" }
+
+Thus, the $\epsilon$-extension of $H$, $H_{\epsilon}$, is expressed using $\Phi$ as shown in the figure below.
+
+![$\epsilon$-extension of $H$]({{site.baseurl}}/img/GII/fig_h_expansion.png){: .centered width="400" }
+
+Since $H_{\epsilon}$ can be writen as $H_{\epsilon} = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a + \epsilon \\}$ and  $\Phi^{-1} ( \gamma(A)) = A$,
+\[ 
+    \Phi^{-1} ( \gamma(H + \epsilon B_{n}) = a + \epsilon = \Phi^{-1} ( \gamma(H)) + \epsilon.
 \]
-we finally obtain
-\[
-    \mathbb{P}(f(x) - M \geq L \epsilon ) \leq \Phi (- \frac{\epsilon}{L}) \leq  \exp (-\frac{\epsilon^{2}}{2L^{2}}).
-\]
+Thus we know that if $A=H$, then the equality holds in Eq.$\,$($\ref{eq:1}$).
+
+Finally, I would like to address what I have postponed: why $\gamma(A) \geq \gamma(H$.
+To be honest, I cannot say that I understand it clearly.
+However, based on what we saw in Isoperimetric Inequality, we can develop the following intuition.
+Let us view $A$ as a set of slices.
+If $A$ is a half space, then every cross-section of $A$ is Gaussian.
+
+![A set of slices of Gaussian]({{site.baseurl}}/img/GII/fig_slice_of_gaussian.png){: .centered width="500" }
+
+Considering the Gaussian as a circle or a set of countless concentric circles, 
+then the measure of the whole $A$ will be minimized.
+If $A$ is not a half space, then some cross-sections are inefficiently increasing its measure, 
+resulting in $\gamma(E) \geq \gamma(H)$. 

@@ -3,6 +3,7 @@ layout: post
 title: "Lipschitz Concentration and Gaussian Isoperimetric Inequality"
 ---
 We show an application of Gaussian isoperimetric inequality to concentration inequalities of Lipschitz functions.
+Note that the theorem of Gaussian Isoperimetric Inequality and its derivation are described in [this post]({{ site.baseurl }}{% post_url 2022-01-26-gaussian-isoperimetric-inequality %}).
 Suppose $ f: \mathcal{X} \mapsto \mathbb{R}$ is $L$-Lipschitz function where $\mathcal{X} \subset \mathbb{R}^n$,
 for all $x,y \in \mathcal{X}$,
 \[
@@ -12,9 +13,9 @@ It is saying that to pull $f(x)$ and $f(y)$ apart $\epsilon$, $x$ and $y$ need t
 
 ![Lipschitz function]({{site.baseurl}}/img/GII/fig_lipschitz.png){: .centered width="500" }
 
-## Connecting Lipschitz continuity to $\epsilon$-expansion
+## Connecting Lipschitz continuity to $\epsilon$-extension
 For simplicity, let $L=1$ from here on.
-Letting $A \subset \mathcal{X}$ and $y \in A$, we consider $\epsilon$-expansion of $A$, $A_{\epsilon}$.
+Letting $A \subset \mathcal{X}$ and $y \in A$, we consider $\epsilon$-extension of $A$, $A_{\epsilon}$.
 Then, we have 
 \[
      \\{ x: f(x) -f(y) \geq \epsilon  \\} \subseteq \\{ x: d(x, A) \geq \epsilon \\} \label{eq:1}\tag{1},
@@ -22,7 +23,7 @@ Then, we have
 where $d(x,A)$ denotes the distance from $x$ to the nearest point in $A$.
 This relationship can be easily understood by drawing a figure like the one below.
 
-![$\epsilon$-expansion of $A$]({{site.baseurl}}/img/GII/fig_a_ep.png){: .centered width="400" }
+![$\epsilon$-extension of $A$]({{site.baseurl}}/img/GII/fig_a_ep.png){: .centered width="400" }
 
 The figure depicts the entire $\mathcal{X}$.
 The area enclosed by the light blue line is $A_{\epsilon}$.

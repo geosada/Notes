@@ -1,5 +1,5 @@
-title: Cayman Blog Theme
-description: Cayman Blog Theme is a clean, responsive blogging theme for Jekyll and Gitlab/GitHub Pages.
+title: Posts
+#description: Cayman Blog Theme is a clean, responsive blogging theme for Jekyll and Gitlab/GitHub Pages.
 show_downloads: true
 
 baseurl: "/Note" # change this to the subpath of your site, e.g. /blog. Leave it empty if you don't need it.
@@ -25,4 +25,5 @@ plugins:
 target-blank:
     rel: nofollow
 
-header_page_refs: ['top', 'about', 'contact']
+#header_page_refs: ['top', 'about', 'contact']
+header_page_refs: ['top']
