@@ -3,7 +3,8 @@ layout: post
 title: "Hypercontractivity of Markov Kernel"
 ---
 Hypercontractivity is the notion that connects to Gaussian logarithmic Sobolev inequality and Data processing inequality.
-As preparation for introducing Hypercontractivity, we begin by describing contractivity. 
+In this post we will see Hypercontractivity 
+begining by describing contractivity as preparation.
 This post is based on [the lecture](https://www.youtube.com/watch?v=YOT95NQztbk) by Himanshu Tyagi.
 
 ## $L_{p}$ Norm
