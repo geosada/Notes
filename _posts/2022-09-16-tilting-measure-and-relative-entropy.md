@@ -62,7 +62,7 @@ We also write
 \[
     \frac{dQ}{dP} = Y,
 \]
-wich is called Radon-Nikodym derivative.
+which is called Radon-Nikodym derivative.
 Say Q is absolutely continuous with respect to $P$, which is denoted as $Q \lt \lt P $,
 if for any measurable $A$, $P(A) = 0 \Rightarrow Q(A) = 0$. 
 In particular, Radon-Nikodym theorem states that 
