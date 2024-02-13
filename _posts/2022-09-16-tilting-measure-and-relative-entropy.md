@@ -85,6 +85,15 @@ We consider tilting with
     {e^{\lambda Z}}
     {\mathop{\mathbb{E}} \left \lbrack e^{\lambda Z} \right \rbrack }.
 \]
+As $Y$ is equal to the moment generating function of $Z$, 
+\[
+    \log Y = \log e^{\lambda Z} - \log \mathop{\mathbb{E}} \left \lbrack e^{\lambda Z} \right \rbrack
+    = \lambda Z - \mathop{\mathbb{E}} \left \lbrack \lambda Z \right \rbrack
+    = \lambda ( Z - \mathop{\mathbb{E}} \left \lbrack Z \right \rbrack )
+    = \log e^{ \lambda ( Z - \mathop{\mathbb{E}} \left \lbrack Z \right \rbrack ) }
+    = \psi_{Z - \mathop{\mathbb{E}}\left \lbrack Z \right \rbrack }(\lambda),
+\]
+which is what we want to control.
 Then, the expectation of $Z$ over the measure
 $
     Q = P_{
