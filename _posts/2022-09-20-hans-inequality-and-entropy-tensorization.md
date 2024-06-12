@@ -8,12 +8,43 @@ In this post, we first see Han's inequality for KL divergence, from which Entrop
 
 ## Han's Inequality
 Han's Inequality states
-$
+\[
     H(X_{1}, \ldots, X_{n}) \leq \frac{1}{n-1} \Sigma_{i=1}^{n} H(X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}),
-$
-where $H(X)$ is the Shannon entoropy, $-\Sigma_{x \in \mathcal{X}} p(x) \log p(x).
-Note that $X_{1}, \ldots, X_{n}$ are not necessary independent of each other.
+\]
+where $H(X)$ is the Shannon entoropy, $-\Sigma p(x) \log p(x)$.
+Note that $X_{1}, \ldots, X_{n}$ do not need to be independent.
+It is derived by using two basic property of the conditional entropy:
+\[
+    H(X,Y) = H(X|Y) + H(Y)
+\]
+and
+\[
+    H(X) \leq H(X|Y).
+\]
+From the first one, we hace the chain rule of entropy:
+\[
+    H(X_{1}, \ldots, X_{n}) = H(X_{1}) + H(X_{2}|X_{1}) + H(X_{3}| X_{1},X_{2}) + \cdots + H(X_{n}| H(X_{1}, \ldots, X_{n-1}).
+\]
 
+Using the first one yields
+\[
+    H(X_{1}, \ldots, X_{n}) = H(X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}) + H(X_{i} | X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}),
+\]
+and applying the second inequality to the second term in the RHS tells us that
+\[
+    H(X_{i} | X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}) \leq H(X_{i} | X_{1}, \ldots, X_{i-1}).
+\]
+Summing $n$ inequalities for different $i$, we have 
+\[
+    n H(X_{1}, \ldots, X_{n}) \leq \Sigma_{i=1}^{n} H(X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}) + H(X_{1}) + H(X_{2}|X_{1}) + H(X_{3}| X_{1},X_{2}) + \cdots + H(X_{n}| H(X_{1}, \ldots, X_{n-1}).
+\]
+Applying the chain rule of entropy, we have the statement.
+
+## Han's inequality for KL divergence
+\[
+\]
+\[
+\]
 We saw 
 in [this post]({{ site.baseurl }}{% post_url 2022-09-01-chernoff-bounds%})
 that if the logarithm of the moment generating function 
