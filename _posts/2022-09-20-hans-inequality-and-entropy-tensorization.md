@@ -86,7 +86,7 @@ we have the statement.
 Indeed, it turns out that equality holds in the above, as we will see.
 Using the product property of $P$, i.e., $P = P^{i}P_{i}$ and $P=\prod_{i=1}^{n}P_{i}$, we have
 \[
-    \color{green}{- \Sigma Q \log P} = - \frac{1}{n} \Sigma_{i=1}^{n} \Sigma Q(\log P^{i} + \log P_{i}).
+    \color{green}{- \Sigma Q \log P} = - \Sigma Q(\log P^{i} + \log P_{i}) = - \frac{1}{n} \Sigma_{i=1}^{n} \Sigma Q(\log P^{i} + \log P_{i}).
 \]
 Since
 $
@@ -95,7 +95,7 @@ $
 we have
 \[
     \color{green}{- \Sigma Q \log P} = - \frac{1}{n} \Sigma_{i=1}^{n} \Sigma Q(\log P^{i} 
-    - \frac{1}{n} \Sigma Q \log P.
+    - \frac{1}{n} \Sigma Q \log P).
 \]
 Rearrangin, we have
 \[
