@@ -51,14 +51,14 @@ and thus it becomes the statement,
 The source of the inequality is the relationship $H(X) \leq H(X|Y)$, meaning that conditioning decreases entropy.
 
 ## Han's inequality for KL divergence
-Symbols with superscript such as $x^(i)$ and $P^(i)$ denote $n-1$ dimensional vectors or distributions marginalized over the $i$-th element, meaning that the $i$-th element is excluded.
+Symbols with superscript $i$ such as $x^{i}$ and $P^{i}$ denote $n-1$ dimensional vectors or distributions marginalized over the $i$-th element, meaning that the $i$-th element is excluded.
 Han's inequality for KL divergence states
 \[
     D(Q \parallel P) \geq \frac{1}{n-1} \Sigma_{i=1}^{n} D(Q^{i} \parallel P^{i})
 \]
 or equivalently,
 \[
-    D(Q \parallel P) \leq \Sigma_{i=1}^{n} (D(Q \parallel P) - D(Q^{i} \parallel P^{i})).
+    D(Q \parallel P) \leq \Sigma_{i=1}^{n} \right(D(Q \parallel P) - D(Q^{i} \parallel P^{i})\left).
 \]
 
 #### Proof
