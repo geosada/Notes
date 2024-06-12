@@ -101,7 +101,7 @@ Rearrangin, we have
 \[
     \color{green}{- \Sigma Q \log P} = \frac{1}{n-1}\Sigma_{i=1}^{n} \Sigma Q \log P^{i}.
 \]
-Since $\Sigma Q = \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \Sigma_{x_{i} \in \mathcal{X}^{1}} Q_{i}$,
+Since $\Sigma Q = \Sigma_{x^{i} \in \mathcal{X}^{n-1}} \Sigma_{x_{i} \in \mathcal{X}^{1}} Q^{i} Q_{i}$,
 we have
 \[
      \color{green}{- \Sigma Q \log P} = \frac{1}{n-1} \Sigma_{i=1}^{n} \color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}}     Q^{i} \log P^{i}}.
