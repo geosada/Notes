@@ -73,14 +73,14 @@ and
     D(Q^{i} \parallel P^{i}) = \color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log P^{i}} - H_{Q^{i}}(X^{i})
 \]
 where 
-$H_{Q^{i}}(X^{i} = \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log Q^{i}$.
+$H_{Q^{i}}(X^{i}) = - \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log Q^{i}$.
 Since Han's inequality tells us
 \[
-    - H_{Q}(X) \leq - \frac{1}{n-1} \Sigma_{i=1}^{n} H_{Q^{i}}(X^{i},
+    - H_{Q}(X) \leq - \frac{1}{n-1} \Sigma_{i=1}^{n} H_{Q^{i}}(X^{i}),
 \]
 if 
 \[
-    \color{green}{- \Sigma Q \log P} \geq \frac{1}{n-1} \Sigma_{i=1}^{n} \color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log P^{i}},
+    \color{green}{- \Sigma Q \log P} \geq \frac{1}{n-1} \Sigma_{i=1}^{n} (\color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log P^{i}}),
 \]
 we have the statement.
 Indeed, it turns out that equality holds in the above, as we will see.
