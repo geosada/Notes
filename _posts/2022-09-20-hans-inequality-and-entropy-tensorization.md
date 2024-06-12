@@ -58,7 +58,7 @@ Han's inequality for KL divergence states
 \]
 or equivalently,
 \[
-    D(Q \parallel P) \leq \Sigma_{i=1}^{n} \right(D(Q \parallel P) - D(Q^{i} \parallel P^{i})\left).
+    D(Q \parallel P) \leq \Sigma_{i=1}^{n} (D(Q \parallel P) - D(Q^{i} \parallel P^{i})).
 \]
 
 #### Proof
