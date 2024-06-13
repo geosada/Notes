@@ -51,8 +51,8 @@ Then, entropy tensorization states
 #### Proof
 Let $P$ be the probability distribution of $X = (X_{1}, \ldots, X_{n})$.
 We consider a tilting measure $Q = P_{Z}$, i.e., $Z = \frac{dQ}{dP}$.
-If $\mathbb{E}_{P} Z = 1$,
-then we know $\text{Ent}(Z) = \mathbb{E}_{P} \left \lbrack Z \log Z\right \rbrack  = D(Q \parallel P)$. 
+If $\mathbb{E}\_{P} Z = 1$,
+then we know $\text{Ent}(Z) = \mathbb{E}\_{P} \left \lbrack Z \log Z\right \rbrack  = D(Q \parallel P)$. 
 
 We start by Han's Inequality for KL divergence,
 \[
