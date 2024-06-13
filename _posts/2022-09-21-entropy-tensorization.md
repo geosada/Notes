@@ -41,7 +41,7 @@ The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $
 that is, conditional expectation conditioned on $X^{i} = X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}$.
 We also introduce the notation 
 \[
-    \text{Ent_i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
+    \text{Ent}\_{i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
 \]
 Then, entropy tensorization states
 \[
