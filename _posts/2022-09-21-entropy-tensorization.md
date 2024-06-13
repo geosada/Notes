@@ -128,3 +128,8 @@ Then, entropy tensorization states
 \[
     \text{Ent}(Z) \leq \mathbb{E} \left \lbrack \Sigma_{i=1}^{n} \text{Ent}_{i}(Z) \right \rbrack .
 \]
+
+#### Proof
+When $\mathbb{E} Z = 1$,
+we know 
+Then
