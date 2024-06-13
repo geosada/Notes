@@ -19,7 +19,7 @@ for a pair of variables $X$ and $Y$.
 Since $p(x,y) = p(x)p(y|x)$,
 From Bayes rule, we know
 \[
-    D(Q \parallel P) = \Sigma_{x,y} q(x) q(y|x) \log \lbrace \frac{q(x)}{p(x)} \cdot \frac{q(y|x)}{p(y|x)} \rbrace.
+    D(Q \parallel P) = \Sigma_{x,y} q(x) q(y|x) \log \left ( \frac{q(x)}{p(x)} \cdot \frac{q(y|x)}{p(y|x)} \right ).
 \]
 Thus, the LHS becomes
 $
