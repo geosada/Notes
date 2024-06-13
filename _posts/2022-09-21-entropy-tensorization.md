@@ -41,15 +41,15 @@ The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $
 that is, conditional expectation conditioned on $X^{i} = X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}$.
 We also introduce the notation 
 \[
-    \text{Ent}\_{i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
+    \text{Ent}\^{i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
 \]
 Then, entropy tensorization states
 \[
-    \text{Ent}(X) \leq \mathbb{E} \left \lbrack \Sigma_{i=1}^{n} \text{Ent}_{i}(X) \right \rbrack .
+    \text{Ent}(X) \leq \Sigma_{i=1}^{n} \mathbb{E} \left \lbrack \text{Ent}\^{i}(X) \right \rbrack .
 \]
 
 #### Proof
-Let $P$ be the probability distribution of $X = ($X_{1}, \ldots, X_{n})$.
+Let $P$ be the probability distribution of $X = (X_{1}, \ldots, X_{n})$.
 We consider a tilting measure $Q = P_{Z}$, i.e., $Z = \frac{dQ}{dP}$.
 If $\mathbb{E}_{P} Z = 1$,
 then we know $\text{Ent}(Z) = \mathbb{E}_{P} [Z \log Z] = D(Q \parallel P)$. 
