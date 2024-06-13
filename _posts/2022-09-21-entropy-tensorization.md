@@ -38,7 +38,8 @@ we define $\Phi = x \log x$ for $x>0$, $\Phi(0)=0$, and
 Let $X_{1}, \ldots, X_{n}$ be independent positive random variables
 and $Z = f(X_{1}, \ldots, X_{n})$.
 The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $X_{i}$ only,
-that is, conditional expectation conditioned on $X^{i} = {X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}}$.
+that is, conditional expectation conditioned on $X^{i} = X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}$.
+$\text{Ent}_{i}(X)$
 We also introduce the notation 
 \[
     \text{Ent}_{i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
