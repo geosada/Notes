@@ -10,6 +10,7 @@ In this post, we first see Han's inequality for KL divergence, from which Entrop
 Han's Inequality states
 \[
     H(X_{1}, \ldots, X_{n}) \leq \frac{1}{n-1} \Sigma_{i=1}^{n} H(X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}),
+    \label{eq:1}\tag{1}
 \]
 where $H(X)$ is the Shannon entoropy, $-\Sigma P \log P$, $P = p(x)$.
 Note that $X_{1}, \ldots, X_{n}$ do not need to be independent.
@@ -55,10 +56,12 @@ Symbols with superscript $i$ such as $x^{i}$ and $P^{i}$ denote $n-1$ dimensiona
 Han's inequality for KL divergence states
 \[
     D(Q \parallel P) \geq \frac{1}{n-1} \Sigma_{i=1}^{n} D(Q^{i} \parallel P^{i})
+    \label{eq:2}\tag{2}
 \]
 or equivalently,
 \[
     D(Q \parallel P) \leq \Sigma_{i=1}^{n} (D(Q \parallel P) - D(Q^{i} \parallel P^{i})).
+    \label{eq:3}\tag{3}
 \]
 
 #### Proof
@@ -74,7 +77,7 @@ and
 \]
 where 
 $H_{Q^{i}}(X^{i}) = - \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log Q^{i}$.
-Since Han's inequality tells us
+Since Han's inequality (Eq.$\,$($\ref{eq:1}$)) tells us
 \[
     - H_{Q}(X) \leq - \frac{1}{n-1} \Sigma_{i=1}^{n} H_{Q^{i}}(X^{i}),
 \]
@@ -82,7 +85,7 @@ if
 \[
     \color{green}{- \Sigma Q \log P} \geq \frac{1}{n-1} \Sigma_{i=1}^{n} (\color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}} Q^{i} \log P^{i}}),
 \]
-we have the statement.
+we can say that (Eq.$\,$($\ref{eq:2}$)) holds.
 Indeed, it turns out that equality holds in the above, as we will see.
 Using the product property of $P$, i.e., $P = P^{i}P_{i}$ and $P=\prod_{i=1}^{n}P_{i}$, we have
 \[
@@ -97,15 +100,31 @@ we have
     \color{green}{- \Sigma Q \log P} = - \frac{1}{n} \Sigma_{i=1}^{n} \Sigma Q(\log P^{i} 
     - \frac{1}{n} \Sigma Q \log P).
 \]
-Rearrangin, we have
+Rearranging, we have
 \[
-    \color{green}{- \Sigma Q \log P} = \frac{1}{n-1}\Sigma_{i=1}^{n} \Sigma Q \log P^{i}.
+    \color{green}{- \Sigma Q \log P} = - \frac{1}{n-1}\Sigma_{i=1}^{n} \Sigma Q \log P^{i}.
 \]
 Since $\Sigma Q = \Sigma_{x^{i} \in \mathcal{X}^{n-1}} \Sigma_{x_{i} \in \mathcal{X}^{1}} Q^{i} Q_{i}$,
 we have
 \[
-     \color{green}{- \Sigma Q \log P} = \frac{1}{n-1} \Sigma_{i=1}^{n} \color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}}     Q^{i} \log P^{i}}.
+     \color{green}{- \Sigma Q \log P} = \frac{1}{n-1} \Sigma_{i=1}^{n} (\color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}}     Q^{i} \log P^{i}}).
 \]
     
+## Entropy tensorization
+As in [this post]({{ site.baseurl }}{% post_url 2022-09-16-tilting-measure-and-relative-entropy%})
+we define $\Phi = x \log x$ for $x>0$, $\Phi(0)=0$, and
 \[
+    \text{Ent}(X) := \mathbb{E} \Phi(Z) - \Phi(\mathbb{E}Z).
+\]
+Let $X_{1}, \ldots, X_{n}$ be independent positive random variables
+and $Z = f(X_{1}, \ldots, X_{n}$.
+The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $X_{i}$ only,
+that is, conditional expectation conditioned on $X^{i} = {X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}}$.
+We also introduce the notation 
+$
+    \text{Ent}_{i}(X) := \mathbb{E}^{i} \Phi(Z) - \Phi(\mathbb{E}^{i} Z).
+$
+Then, entropy tensorization states
+\[
+    \text{Ent}(Z) \leq \mathbb{E} \left \lbrack \Sigma_{i=1}^{n} \text{Ent}_{i}(Z) \right \rbrack .
 \]

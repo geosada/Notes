@@ -122,7 +122,7 @@ is
 ## Entropy
 For convex function $\phi$, Jensen's inequality says 
 \[
-    \mathbb{E} \phi(X) - \phi(\mathbb{E} X)a \geq 0.
+    \mathbb{E} \phi(X) - \phi(\mathbb{E} X) \geq 0.
 \]
 If $\phi = x^{2}$, we get $Var$.
 If $\phi = x \log x$, we get 
