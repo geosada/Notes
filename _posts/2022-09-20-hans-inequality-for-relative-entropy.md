@@ -3,8 +3,9 @@ layout: post
 title: "Han's Inequality for Relative Entropy"
 ---
 
-Entropy tensorization, or the sub-additivity property of the entropy, is one of the ingradients to derive binary log-sobolev inequality and Gaussain log-sobolev inequality.
-In this post, we see Han's inequality for relative entropy (KL divergence), from which Entropy tensorization is directly derived. 
+In this post, we see Han's inequality for relative entropy (KL divergence).
+Han's inequality is used to derive entropy tensorization, and
+inequalities such as binary and Gaussain log-sobolev inequality are derived using entropy tensorization.
 
 ## Han's Inequality
 Han's Inequality states
@@ -110,4 +111,4 @@ we have
      \color{green}{- \Sigma Q \log P} = \frac{1}{n-1} \Sigma_{i=1}^{n} (\color{blue}{- \Sigma_{x^{i} \in \mathcal{X}^{n-1}}     Q^{i} \log P^{i}}).
 \]
     
-We will derive eontropy tensorization using Eq.$\,$($\ref{eq:3}$) in [the next post]({{ site.baseurl }}{% post_url 2022-09-21-entropy-tensorization%})
+We will derive eontropy tensorization using Eq.$\,$($\ref{eq:3}$) in [the next post]({{ site.baseurl }}{% post_url 2022-09-21-entropy-tensorization%}).
