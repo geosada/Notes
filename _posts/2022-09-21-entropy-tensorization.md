@@ -26,17 +26,17 @@ $
     D(Q \parallel P) = D(Q(X) \parallel P(X)) +  \mathbb{E}_{y \sim P} \left \lbrack  D((P(X|Y = y) \parallel Q(X|Y = y)) \right \rbrack
 $, and we have
 \[
-    D(Q \parallel P) = D(Q(X) \parallel P(X)) + (D(P(X|Y) \parallel Q(X|Y)).
+    D(Q \parallel P) = D(Q(X) \parallel P(X)) + D(P(X|Y) \parallel Q(X|Y)).
 \]
 
 ## Entropy tensorization
 As in [this post]({{ site.baseurl }}{% post_url 2022-09-16-tilting-measure-and-relative-entropy%})
 we define $\Phi = x \log x$ for $x>0$, $\Phi(0)=0$, and
 \[
-    \text{Ent}(X) := \mathbb{E} \Phi(Z) - \Phi(\mathbb{E}Z).
+    \text{Ent}(X) := \mathbb{E} \Phi(X) - \Phi(\mathbb{E}X).
 \]
 Let $X_{1}, \ldots, X_{n}$ be independent positive random variables
-and $Z = f(X_{1}, \ldots, X_{n}$.
+and $Z = f(X_{1}, \ldots, X_{n})$.
 The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $X_{i}$ only,
 that is, conditional expectation conditioned on $X^{i} = {X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}}$.
 We also introduce the notation 
@@ -52,7 +52,7 @@ Then, entropy tensorization states
 Let $P$ be the probability distribution of $X = ($X_{1}, \ldots, X_{n})$.
 We consider a tilting measure $Q = P_{Z}$, i.e., $Z = \frac{dQ}{dP}$.
 If $\mathbb{E}_{P} Z = 1$,
-then we know $\text{Ent}(Z) = $\mathbb{E}_{P} [Z \log Z] = D(Q \parallel P)$. 
+then we know $\text{Ent}(Z) = \mathbb{E}_{P} [Z \log Z] = D(Q \parallel P)$. 
 
 We start by Han's Inequality for KL divergence,
 \[
@@ -65,7 +65,7 @@ Then, splitting $X$ into $X_{i}$ and $X^{i}$ and applying chain rule for KL dive
 \]
 Substituting this into the RHS of Eq.$\,$($\ref{eq:1}$), Eq.$\,$($\ref{eq:1}$) becomes
 \[
-   D(Q \parallel P) \leq \Sigma_{i=1}^{n} D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})).1 
+   D(Q \parallel P) \leq \Sigma_{i=1}^{n} D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})). 
 \]
 \[
 \]
