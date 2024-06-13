@@ -65,11 +65,6 @@ Then, splitting $X$ into $X_{i}$ and $X^{i}$ and applying chain rule for KL dive
 \]
 Substituting this into the RHS of Eq.$\,$($\ref{eq:1}$), Eq.$\,$($\ref{eq:1}$) becomes
 \[
-   D(Q \parallel P) \leq \Sigma_{i=1}^{n} D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})). 
+   D(Q \parallel P) \leq \Sigma_{i=1}^{n} D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})), 
 \]
-\[
-\]
-\[
-\]
-\[
-\]
+and thus we have the statement.
