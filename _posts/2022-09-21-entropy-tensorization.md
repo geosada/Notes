@@ -27,7 +27,7 @@ $
 $, 
 and we thus have
 \[
-    D(Q \parallel P) = D(Q(X) \parallel P(X)) + \Sigma_{x} q(x) \mathbb{E}_{y \sim P}\left \lbrack  D(P(Y|X) \parallel Q(Y|X)) \right \rbrack.
+    D(Q \parallel P) = D(Q(X) \parallel P(X)) + \mathbb{E}_{x \sim Q}\left \lbrack  D(P(Y|X) \parallel Q(Y|X)) \right \rbrack.
 \]
 
 ## Entropy tensorization
