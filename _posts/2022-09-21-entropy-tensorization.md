@@ -22,9 +22,9 @@ From Bayes rule, we know
     D(Q \parallel P) = \Sigma_{x,y} q(x) q(y|x) \log \left ( \frac{q(x)}{p(x)} \cdot \frac{q(y|x)}{p(y|x)} \right ).
 \]
 The LHS can be decomposed as
-$
-    D(Q \parallel P) = D  \left ( Q(X) \parallel P(X) \right ) \Sigma_{y} q(y|x) +  \Sigma_{x} q(x) D(Q(Y|X = x) \parallel P(Y|X = x)
-$, 
+\[
+    D(Q \parallel P) = D  \left ( Q(X) \parallel P(X) \right ) \Sigma_{y} q(y|x) +  \Sigma_{x} q(x) D(Q(Y|X = x) \parallel P(Y|X = x),
+\]
 and we thus have
 \[
     D(Q \parallel P) = D(Q(X) \parallel P(X)) + \mathbb{E}_{x \sim Q}\left \lbrack  D(Q(Y|X) \parallel P(Y|X)) \right \rbrack.
