@@ -23,11 +23,11 @@ From Bayes rule, we know
 \]
 The LHS can be decomposed as
 $
-    D(Q \parallel P) = D  \left ( Q(X) \parallel P(X) \right ) \Sigma_{y} q(y|x) +  \Sigma_{x} q(x) D((P(Y|X = x) \parallel Q(Y|X = x))
+    D(Q \parallel P) = D  \left ( Q(X) \parallel P(X) \right ) \Sigma_{y} q(y|x) +  \Sigma_{x} q(x) D((Q(Y|X = x) \parallel P(Y|X = x))
 $, 
 and we thus have
 \[
-    D(Q \parallel P) = D(Q(X) \parallel P(X)) + \mathbb{E}_{x \sim Q}\left \lbrack  D(P(Y|X) \parallel Q(Y|X)) \right \rbrack.
+    D(Q \parallel P) = D(Q(X) \parallel P(X)) + \mathbb{E}_{x \sim Q}\left \lbrack  D(Q(Y|X) \parallel P(Y|X)) \right \rbrack.
 \]
 
 ## Entropy tensorization
