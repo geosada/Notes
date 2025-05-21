@@ -25,12 +25,12 @@ saying that if the areas are equal, the perimeter will be the smallest when form
 Let us express this a little more formally.
 The perimeter is defined as
 \\[
-\text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
+    \text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
 \\]
 We introduce the notion of $\epsilon$-extension, and the $\epsilon$-extension of $A$ is denoted by $\mu(A_{\epsilon}$, which is defined as 
-$$
+\\[
     A_{\epsilon} =\\{ x: d(x, A) \leq \epsilon \\}
-$$
+\\]
 where $d(x,A)$ denotes the distance from $x$ to the nearest point in $A$.
 It is just saying that $A_{\epsilon}$ is $A$ blown up by a small $\epsilon$, like below.
 
@@ -46,9 +46,9 @@ $\gamma(A)$ is something like the density assigned to the entire region $A$ in t
 The closer $A$ is to the mean, the larger $\gamma(A)$ becomes.
 As before, $\epsilon$-extension of $A$ is $A_{\epsilon} = A + \epsilon B_{n}$, where $B_{n}$ is an unit ball in $n$ dimension space.
 Then, Gaussian isoperimetric inequality says
-\[ 
+\\[ 
     \Phi^{-1} ( \gamma(A + \epsilon B_{n})) \geq \Phi^{-1} ( \gamma(A)) + \epsilon, \label{eq:1}\tag{1}
-\]
+\\]
 where $\Phi$ is the CDF of Gaussian.
 It is saying that $\epsilon$-extension of $A$ makes the yellow line longer than $\epsilon$ in the following.
 
@@ -61,9 +61,9 @@ i.e., $\gamma(A + \epsilon B_{n}) \geq \gamma(H + \epsilon B_{n})$ for all $A$.
 
 It is difficult to get an intuition as to all this, but let me leave this for now and move on.
 We show that when $A = H$, the equality holds in Eq.$\,$($\ref{eq:1}$), i.e., 
-\[ 
+\\[ 
     \Phi^{-1} ( \gamma(H + \epsilon B_{n})) = \Phi^{-1} ( \gamma(H)) + \epsilon.
-\]
+\\]
 Here, we use the property that an orthogonal projection of a multidimensional Gaussian into one dimension becomes a $1$-dimensional Gaussian.
 
 ![Projection of Gaussian]({{site.baseurl}}/img/GII/fig_projected_gauss.png){: .centered width="400" }
@@ -73,9 +73,9 @@ Thus, the $\epsilon$-extension of $H$, $H_{\epsilon}$, is expressed using $\Phi$
 ![$\epsilon$-extension of $H$]({{site.baseurl}}/img/GII/fig_h_expansion.png){: .centered width="400" }
 
 Since $H_{\epsilon}$ can be writen as $H_{\epsilon} = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a + \epsilon \\}$ and  $\Phi^{-1} ( \gamma(A)) = A$,
-\[ 
+\\[ 
     \Phi^{-1} ( \gamma(H + \epsilon B_{n}) = a + \epsilon = \Phi^{-1} ( \gamma(H)) + \epsilon.
-\]
+\\]
 Thus we know that if $A=H$, then the equality holds in Eq.$\,$($\ref{eq:1}$).
 
 Finally, I would like to address what I have postponed: why $\gamma(A) \geq \gamma(H$.
