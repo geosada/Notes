@@ -128,7 +128,9 @@ With $m_{1}=O(1/\epsilon)$,
 - **Residual error**:
   The Frobenius norm of $R$ satisfies
   \\[
-    \|R\|_{F} = \|P A P\|_{F} \le \sqrt{\mathrm{rank}(R)} \, \|A\| = O(\sqrt{\epsilon})\,\|A\|_{F}.
+    \lVert R\rVert_F \;=\;\lVert P\,A\,P\rVert_F
+    \;\le\;\sqrt{\mathrm{rank}(R)}\,\lVert A\rVert_F
+    \;=\;O(\sqrt{\epsilon})\,\lVert A\rVert_F.
   \\]
   Thus a constant number $m_{2}$ of probes yields
   \\[
