@@ -25,12 +25,12 @@ saying that if the areas are equal, the perimeter will be the smallest when form
 Let us express this a little more formally.
 The perimeter is defined as
 \[
-    \text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
+\text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
 \]
 We introduce the notion of $\epsilon$-extension, and the $\epsilon$-extension of $A$ is denoted by $\mu(A_{\epsilon}$, which is defined as 
-\[
+$$
     A_{\epsilon} =\\{ x: d(x, A) \leq \epsilon \\}
-\]
+$$
 where $d(x,A)$ denotes the distance from $x$ to the nearest point in $A$.
 It is just saying that $A_{\epsilon}$ is $A$ blown up by a small $\epsilon$, like below.
 
