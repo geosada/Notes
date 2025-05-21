@@ -24,9 +24,9 @@ If the water drop story makes sense to us, then no surprise about this, it is $A
 saying that if the areas are equal, the perimeter will be the smallest when forming a circle.
 Let us express this a little more formally.
 The perimeter is defined as
-\[
+\\[
 \text{surf}(A) := \liminf_{\epsilon \rightarrow \infty}\ \frac{\mu(A_{\epsilon}) - \mu(A)}{\epsilon}.
-\]
+\\]
 We introduce the notion of $\epsilon$-extension, and the $\epsilon$-extension of $A$ is denoted by $\mu(A_{\epsilon}$, which is defined as 
 $$
     A_{\epsilon} =\\{ x: d(x, A) \leq \epsilon \\}
