@@ -5,6 +5,11 @@ title: "Hutch++: Efficient Stochastic Trace Estimation"
 Estimating the trace of large matrices efficiently is a key primitive in many machine learning tasks—e.g., computing divergence in continuous normalizing flows or approximating log-determinants in Gaussian processes. 
 Hutchinson’s estimator uses random probes to give unbiased trace estimates but requires $O\bigl(1/\varepsilon^2 \bigr)$ matrix–vector multiplications to achieve relative error $\varepsilon$.
 Hutch++ enhances this to $O\bigl(1/\varepsilon \bigr)$ by combining a one-time low-rank deflation with a few classical Hutchinson probes.
+## Scoop‑and‑Weigh
+Imagine a jar of mixed coins—pennies, nickels, dimes, and quarters—and you want its total value without counting each coin:
+- Vaniulla Hutchinson: scoop random handfuls and weigh them; each scoop is noisy, so many scoops are needed.
+- Hutch++: first pull out and count all quarters (the “heavy hitters”) exactly, then take a few handfuls of the remaining small-change. Fewer handfuls suffice because the leftovers are more uniform.
+By removing the largest contributors first, Hutch++ drastically reduces the number of random probes.
 
 Hypercontractivity in $1$-dimension was described in
 [the previous post]({{ site.baseurl }}{% post_url 2023-01-25-hypercontractivity-of-markov-kernel %}).
