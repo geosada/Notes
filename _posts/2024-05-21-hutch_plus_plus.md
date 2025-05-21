@@ -16,132 +16,142 @@ By removing the largest contributors first, Hutch++ drastically reduces the numb
 
 ---
 
-## 2. Step-by-Step Algorithm
+## 2. Algorithm
 
 Let $A \in \mathbb{R}^{n\times n}$ be symmetric, with trace $\tau = \mathrm{tr}(A)$. We target relative error $\epsilon$. Hutch++ runs in two stages:
 
 ### 2.1 Low-Rank Deflation ("Pulling Out the Quarters")
 
 1. **Sketch matrix**: draw $S \in \mathbb{R}^{n\times m_{1}}$ with $m_{1} = O(1/\epsilon)$ random Gaussian columns.
-2. **Amplify**: compute the matrix–product
+2. **Amplify**: compute
    \\[
    Y = A S,
    \\]
-   using $m_{1}$ mat-vec products. Each column $y_{i} = A s_{i}$ emphasizes directions with larger eigenvalues.
-3. **Orthonormalize**: perform a thin QR on $Y$ to obtain $Q \in \mathbb{R}^{n\times m_{1}}$ with orthonormal columns.  Theory shows $\mathrm{span}(Q)$ approximates the top-$m_{1}$ eigenspace of $A$.
-4. **Exact trace of low-rank part**: form the small $m_{1}\times m_{1}$ matrix
+   using $m_{1}$ mat–vecs. Each column $y_{i}=A s_{i}$ is biased toward top eigen-directions.
+
+   - **Why?**  Write each random $s_{i}$ in the eigenbasis $\{v_{j}\}$:
+     \\[
+       s_{i} = \sum_{j=1}^{n} (v_{j}^\top s_{i})\,v_{j},
+     \\]
+     and then
+     \\[
+       y_{i} = A s_{i} = V\Lambda V^\top s_{i} = \sum_{j=1}^{n} \lambda_{j}(v_{j}^\top s_{i})\,v_{j}.
+     \\]
+     Each component along $v_{j}$ is **scaled by $\lambda_{j}$**, so large eigenvalues dominate $y_{i}$.
+
+3. **Orthonormalize**: perform QR on $Y$ to get $Q \in \mathbb{R}^{n\times m_{1}}$ with orthonormal columns.  Theory shows
    \\[
-   B = Q^\top (A Q),
+     \mathrm{span}(Q) \approx \text{span of top-}m_{1}\text{ eigenvectors of }A.
    \\]
-   then compute its trace
+
+4. **Exact trace of low-rank part**: form the small matrix
    \\[
-   \tau_{\mathrm{low}} = \mathrm{tr}(B),
+     B = Q^\top (A Q),
    \\]
-   capturing the dominant contribution to $\tau$.
+   then compute
+   \\[
+     \tau_{\mathrm{low}} = \mathrm{tr}(B).
+   \\]
 
-After this, the **residual** trace under the projector
-
-\\[
-P = I - Q Q^\top
-\\]
-
-satisfies with high probability:
-
-\\[
-\mathrm{tr}(P A P) \le \epsilon \, \tau.
-\\]
+   This captures the “quarters.”  The **residual** matrix is
+   \\[
+     R = P A P,
+     \quad
+     P = I - QQ^\top,
+   \\]
+   where $P$ is an **orthogonal projector** onto the subspace **left over** after removing span($Q$).  A projector satisfies
+   \\[
+     P^{2} = P,
+     \quad
+     P^{\top} = P.
+   \\]
+   Intuitively, for any vector $x$, $P x = x - QQ^\top x$ **subtracts out** its projection onto span($Q$), leaving the component orthogonal to those top directions.
 
 ### 2.2 Residual Estimation ("Few Handfuls of Small Coins")
 
-Perform $m_{2} = O(1)$ Hutchinson probes on the residual matrix $P A P$:
+Perform $m_{2}=O(1)$ Hutchinson probes on $R=PAP$:
 
-1. **Project** a random vector $v_{j}$:
+1. **Project** a random $v_{j}$:
    \\[
-   z_{j} = P v_{j}.
+     z_{j} = P v_{j}.
    \\]
 2. **Probe**:
    \\[
-   X_{j} = z_{j}^\top (A z_{j}) = z_{j}^\top (P A P) z_{j},
+     X_{j} = z_{j}^\top (A z_{j}) = z_{j}^\top R\,z_{j}.
    \\]
-3. **Average**:
+3. **Average** for an unbiased estimate:
    \\[
-   \tau_{\mathrm{res}} = \frac{1}{m_{2}} \sum_{j=1}^{m_{2}} X_{j},
+     \tau_{\mathrm{res}} = \frac{1}{m_{2}}\sum_{j=1}^{m_{2}} X_{j} \approx \mathrm{tr}(R).
    \\]
-   an unbiased estimate of $\mathrm{tr}(P A P)$.
 
 ### 2.3 Combine
 
-The final trace estimate is
-
+The final estimate is
 \\[
-\widehat{\tau} = \tau_{\mathrm{low}} + \tau_{\mathrm{res}}.
+  \widehat{\tau} = \tau_{\mathrm{low}} + \tau_{\mathrm{res}},
 \\]
-
-The total cost is $O(1/\epsilon)$ mat-vecs, improving over $O(1/\epsilon^{2})$ for vanilla Hutchinson.
+using $O(1/\epsilon)$ mat–vecs total instead of $O(1/\epsilon^{2})$.
 
 ---
 
 ## 3. Why It Works: Capturing the Top Eigenspace
 
-- **Eigen-decomposition**:
-  \\[
-  A = V \Lambda V^\top,
-  \quad
-  \Lambda = \mathrm{diag}(\lambda_{1} \ge \lambda_{2} \ge \dots \ge \lambda_{n}).
-  \\]
-- **Random sketch**: expand each column $s_{i}$ as
-  \\[
-  s_{i} = \sum_{j=1}^{n} c_{j} \, v_{j},
-  \quad
-  c_{j} = v_{j}^\top s_{i}.
-  \\]
-- **Amplification**: applying $A$ gives
-  \\[
-  y_{i} = A s_{i} = V \Lambda V^\top s_{i} = \sum_{j=1}^{n} \lambda_{j} \, c_{j} \, v_{j},
-  \\]
-  so large eigenvalues yield larger components.
-- **QR →** $Q$**:** orthonormalizing the columns of $Y$ extracts a basis approximating the top eigenspace.
+1. **Eigen-decomposition**:
+   \\[
+     A = V\Lambda V^\top,
+     \quad
+     \Lambda = \mathrm{diag}(\lambda_{1} \ge \lambda_{2} \ge \dots \ge \lambda_{n}).
+   \\]
+2. **Random sketch** columns $s_{i}$ expand as above; $y_{i}=As_{i}$ **amplifies** large $\lambda_{j}$.
+3. **QR → $Q$**: orthonormalizing $Y$ extracts the dominant subspace.
 
-With $m_{1} = O(1/\epsilon)$, one can show:
-
+With $m_{1}=O(1/\epsilon)$,
 \\[
-\mathrm{tr}(P A P) = \sum_{j>m_{1}} \lambda_{j} \le \epsilon \, \sum_{j=1}^{n} \lambda_{j} = \epsilon \, \tau.
+  \mathrm{tr}(P A P) = \sum_{j>m_{1}} \lambda_{j} \le \epsilon \sum_{j=1}^{n} \lambda_{j} = \epsilon\tau.
 \\]
 
 ---
 
-## 4. Error Analysis
+## 4. Detailed Error Analysis
 
-1. **Low-rank error**: if $Q$ captured the true top $m_{1}$ eigenvectors,
-   \\[
-   \Delta_{\mathrm{low}} = \sum_{j=m_{1}+1}^{n} \lambda_{j} \le \epsilon \, \tau.
-   \\]
-   Randomized sketching achieves the same bound up to lower-order terms.
-2. **Residual variance**:
-   \\[
-   \|P A P\|_{F} \le \sqrt{\epsilon} \, \|A\|_{F},
-   \\]
-   so a constant number of probes gives relative error $O(\epsilon)$.
+- **Low-rank error** $\Delta_{\mathrm{low}}$:
+  Ideal deflation misses
+  \\[
+    \Delta_{\mathrm{low}} = \tau - \tau_{\mathrm{low}} = \mathrm{tr}(P A P) = \sum_{j>m_{1}} \lambda_{j}.
+  \\]
+  By choosing $m_{1}=O(1/\epsilon)$ via randomized sketches, one ensures
+  \\[
+    \Delta_{\mathrm{low}} \le \epsilon\tau
+  \\]
+  with high probability.
 
-Combined:
+- **Residual error**:
+  The Frobenius norm of $R$ satisfies
+  \\[
+    \|R\|_{F} = \|P A P\|_{F} \le \sqrt{\mathrm{rank}(R)} \, \|A\| = O(\sqrt{\epsilon})\,\|A\|_{F}.
+  \\]
+  Thus a constant number $m_{2}$ of probes yields
+  \\[
+    |\tau_{\mathrm{res}} - \mathrm{tr}(R)| = O(\epsilon\tau).
+  \\]
 
-\\[
-\widehat{\tau} = (1 \pm O(\epsilon)) \, \tau
-\\]
-
-with high probability.
+- **Overall**: combining both,
+  \\[
+    |\widehat{\tau} - \tau| = O(\epsilon\tau),
+  \\]
+  i.e.\ $\widehat{\tau}=(1\pm O(\epsilon))\,\tau$.
 
 ---
 
 ## 5. Practical Considerations
 
-- **Spectral decay**: rapid eigenvalue decay yields maximum gains; flat spectra diminish benefits.
-- **Preprocessing cost**: QR on $Y$ and storing $Q$ add overhead—best when $n$ is large and $\epsilon$ small.
-- **Tuning**: choose sketch size $m_{1}$ and probe count $m_{2}$ to balance deflation versus sampling cost.
-- **High-confidence**: if pre-committing probes, require $O(\sqrt{\log(1/\delta)})$ extra factor for failure probability $\delta$.
+- **Spectral decay**: fast decay maximizes gains; flat spectra reduce benefits.
+- **Preprocessing cost**: QR on $Y$ and storing $Q$ add overhead—best when $n$ large and $\epsilon$ small.
+- **Tuning**: select $m_{1},m_{2}$ to balance deflation vs. sampling.
+- **Projector recap**: $P=I-QQ^\top$ satisfies $P^{2}=P$, projecting out span($Q$).
 
 ---
 
 ## 6. Conclusion
 
-**Hutch++** combines a one-time low-rank deflation with a few standard Hutchinson probes to reduce trace-estimation complexity from $O(1/\epsilon^{2})$ to $O(1/\epsilon)$. By “lifting out the quarters” first and then taking “handfuls of small coins,” it offers an efficient, unbiased, and scalable solution for high-accuracy trace estimation in machine-learning pipelines.
+**Hutch++** combines low-rank deflation (“lift out the quarters”) and Hutchinson probes (“handfuls of coins”) to reduce trace-estimation from $O(1/\epsilon^{2})$ to $O(1/\epsilon)$, offering an efficient, unbiased, scalable method for high-accuracy trace estimation.
