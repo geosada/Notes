@@ -28,3 +28,14 @@ target-blank:
 
 header_page_refs: ['top', 'about']
 #header_page_refs: ['top']
+
+# 250521 accrding to ChatGPT
+markdown: kramdown
+kramdown:
+  # if you want GitHub-Flavored Markdown extensions (like tables), you can still use:
+  input: GFM
+  # tell kramdown to leave math code untouched for later processing
+  math_engine: mathjax
+  math_engine_opts:
+    preview: true
+
