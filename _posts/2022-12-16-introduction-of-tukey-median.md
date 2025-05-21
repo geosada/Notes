@@ -28,10 +28,10 @@ We will estimate $\mu$ in this situation; in other words, we will output $\hat{\
 We first introduce  *Tukey depth*.
 For any set of points  $S \subset \mathbb{R}^{d}$ of size $n$, and any point $\eta \in \mathbb{R}^{d}$,
 Tukey depth is defined as
-\[
+\\[
     \text{depth}(S, \eta) = \inf_{\lVert v \rVert_{2} =1}
     \frac{1}{n} | \\{ x \in S: \langle x - \eta, v \rangle \geq 0  \\} |.
-\]
+\\]
 
 The following figure illustrates for $n=15$.
 
@@ -46,9 +46,9 @@ the point is with respect to the dataset $S$*.
 
 ## Tukey median
 The Tukey median, which we will denote $\text{Tukey}(S)$, is simply defined as 
-\[
+\\[
     \text{Tukey}(S) = \underset{\eta}{\operatorname{argmax}} \text{depth}(S, \eta).
-\]
+\\]
 *Observe that this is fundamentally a property of projections of the data. Thus this can hope to circumvent
 these dimensionality issues.*
 
@@ -60,13 +60,13 @@ A situation where an $\epsilon$-fraction of samples from true distribution have 
 Let $S \subset \mathbb{R}^{d}$ be an $\epsilon$-corrupted set of samples of size $n$ from $\mathcal{N}(\mu, \text{I}\_{d})$,
 where $\epsilon \lt \frac{1}{6}$.
 Then, there exists some universal constant $C \lt 0$ so that with probability $1 − \delta$, we have that
-\[
+\\[
     \lVert \text{Tukey}(S) - \mu \rVert_{2} \leq \Phi^{-1}
     \left (
     \frac{1}{2} + 3 \epsilon + 
     C \sqrt{ \frac{d + \log 1/\delta}{n} }
     \right ).
-\]
+\\]
 The proof will follow in the next post, but before that, if this form is true, then we can say the following:
 if $n$ is sufficiently large and $\epsilon$ is relatively small, 
 then the upper bound of the error between $\text{Tukey}(S)$ and $\mu$, i.e., the RHS, becomes $O(\epsilon)$.
@@ -76,9 +76,9 @@ and $\Phi^{-1}(x)$ behaves almost linear around $x=\frac{1}{2}$, as
 ![Inverse Gaussian CDF]({{site.baseurl}}/img/Tukey/fig_inv_cdf.png){: .centered width="400" }
 
 We derive the above in the next post.
-\[
-\]
-\[
-\]
-\[
-\]
+\\[
+\\]
+\\[
+\\]
+\\[
+\\]

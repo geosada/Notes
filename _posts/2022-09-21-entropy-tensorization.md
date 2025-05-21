@@ -18,36 +18,36 @@ Consider two distributions $P(X,Y)$ and $Q(X,Y)$
 for a pair of variables $X$ and $Y$.
 Since $p(x,y) = p(x)p(y|x)$,
 From Bayes rule, we know
-\[
+\\[
     D(Q \parallel P) = \Sigma_{x,y} q(x) q(y|x) \log \left ( \frac{q(x)}{p(x)} \cdot \frac{q(y|x)}{p(y|x)} \right ).
-\]
+\\]
 The LHS can be decomposed as
-\[
+\\[
     D(Q \parallel P) = D  \left ( Q(X) \parallel P(X) \right ) \Sigma_{y} q(y|x) +  \Sigma_{x} q(x) D(Q(Y|X = x) \parallel P(Y|X = x)),
-\]
+\\]
 and we thus have
-\[
+\\[
     D(Q \parallel P) = D(Q(X) \parallel P(X)) + \mathbb{E}_{x \sim Q}\left \lbrack  D(Q(Y|X) \parallel P(Y|X)) \right \rbrack.
-\]
+\\]
 
 ## Entropy tensorization
 As in [this post]({{ site.baseurl }}{% post_url 2022-09-16-tilting-measure-and-relative-entropy%})
 we define $\Phi = x \log x$ for $x>0$, $\Phi(0)=0$, and
-\[
+\\[
     \text{Ent}(X) := \mathbb{E} \Phi(X) - \Phi(\mathbb{E}X).
-\]
+\\]
 Let $X_{1}, \ldots, X_{n}$ be independent positive random variables
 and $Z = f(X_{1}, \ldots, X_{n})$.
 The notation $\mathop{\mathbb{E}}^{i}$ denotes expectation w.r.t. the variable $X_{i}$ only,
 that is, conditional expectation conditioned on $X^{i} = X_{1}, \ldots, X_{i-1}, X_{i+1}, \ldots, X_{n}$.
 We also introduce the notation 
-\[
+\\[
     \text{Ent}^{i}(X) := \mathbb{E}^{i} \Phi(X) - \Phi(\mathbb{E}^{i} X).
-\]
+\\]
 Then, entropy tensorization states
-\[
+\\[
     \text{Ent}(X) \leq \Sigma_{i=1}^{n} \mathbb{E} \left \lbrack \text{Ent}^{i}(X) \right \rbrack .
-\]
+\\]
 
 #### Proof
 Let $P$ be the probability distribution of $X = (X_{1}, \ldots, X_{n})$.
@@ -56,16 +56,16 @@ If $\mathbb{E}\_{P} Z = 1$,
 then we know $\text{Ent}(Z) = \mathbb{E}\_{P} \left \lbrack Z \log Z\right \rbrack  = D(Q \parallel P)$. 
 
 We start by Han's Inequality for KL divergence,
-\[
+\\[
     D(Q \parallel P) \leq \Sigma_{i=1}^{n} (D(Q \parallel P) - \color{blue}{D(Q(X^{i}) \parallel P(X^{i}))}).
     \label{eq:1}\tag{1}
-\]
+\\]
 Then, splitting $X$ into $X_{i}$ and $X^{i}$ and applying chain rule for KL divergence, we have
-\[
+\\[
     D(Q \parallel P) = \color{blue}{D(Q(X^{i}) \parallel P(X^{i}))} + D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})).
-\]
+\\]
 Substituting this into the RHS of Eq.$\,$($\ref{eq:1}$), Eq.$\,$($\ref{eq:1}$) becomes
-\[
+\\[
    D(Q \parallel P) \leq \Sigma_{i=1}^{n} D(Q(X_{i}|X^{i}) \parallel P(X_{i}|X^{i})), 
-\]
+\\]
 and thus we have the statement.
