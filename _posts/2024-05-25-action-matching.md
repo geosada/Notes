@@ -90,14 +90,13 @@ L_{AM}(s)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s),
 where the cross-term $\mathcal{K}_{\mathrm{AM}}(s)$ is obtained by applying the above IBP to $f=q_t\nabla s_t^*$ and $g=s_t$, then using
 
 \\[
-\nabla\cdot(q_t
-abla s_t^*)=-\partial_t q_t
+\nabla\cdot(q_t \nabla s_t^*)=-\partial_t q_t
 \\]
 
 to yield:
 
 \\[
-\mathcal{K}_{\mathrm{AM}}(s)=-\int_{0}^{1}\!\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
+\mathcal{K}_{\mathrm{AM}}(s)=-\int_{0}^{1}\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
 \\]
 
 Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
@@ -107,7 +106,7 @@ Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on t
 Figure 2 shows AM’s path need not match the **Wasserstein-2 ($\mathcal{W}_2$) geodesic** between $p_0,p_1$, which solves:
 
 \\[
-\inf_{\{p_t,v\}}\Bigl\{\int_{0}^{1}\!\int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
+\inf_{\{p_t,v\}}\Bigl\{\int_{0}^{1}\int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
 \\]
 
 AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
@@ -117,7 +116,7 @@ AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
 For stochastic dynamics, eAM minimizes:
 
 \\[
-\mathbb{E}_{x_{0:T}}\Bigl[\int_{0}^{1}\!\tfrac12\|\dot x_t\|^2dt\Bigr]
+\mathbb{E}_{x_{0:T}}\Bigl[\int_{0}^{1}\tfrac12\|\dot x_t\|^2dt\Bigr]
 +\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathcal{W}).
 \\]
 
@@ -135,7 +134,7 @@ with source $r_t(x)$, and loss:
 
 \\[
 L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s)
-+\lambda\int_{0}^{1}\!\int r_t(x)^2\,dx\,dt.
++\lambda\int_{0}^{1}\int r_t(x)^2\,dx\,dt.
 \\]
 
 This handles birth/death, sampling errors, and unnormalized marginals.
