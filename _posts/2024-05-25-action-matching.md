@@ -5,8 +5,6 @@ title: "[Paper reading] Action Matching: Learning Stochastic Dynamics from Sampl
 
 Learning dynamical systems from data is a central problem across physics, biology, and machine learning. The recent paper **"Action Matching: Learning Stochastic Dynamics from Samples"** (Neklyudov et al., 2023) proposes a method to recover time-evolving dynamics from static snapshots. Unlike traditional approaches requiring full trajectories, Action Matching (AM) operates on independently drawn samples from time-indexed distributions $\{p_t(x)\}_{t\in[0,1]}$. This opens the door to learning in domains where time series data is unavailable, such as single-cell biology or diffusion models.
 
-This article offers an intuitive walkthrough of the motivation, formulation, and extensions of Action Matching. It also compares AM with Flow Matching (FM), clarifies the roles of distributions and potentials in dynamics, and interprets the algorithm’s behavior with mathematical precision.
-
 ## Problem Setup and Core Idea
 
 We are given i.i.d. samples $\{x_i^t\}\sim p_t(x)$ at different time points $t\in[0,1]$. The goal is to learn a velocity field $v(x,t)$ such that the evolution of $p_t(x)$ satisfies the **continuity equation**:
@@ -20,7 +18,7 @@ This equation ensures conservation of probability mass over time.
 AM proposes to restrict $v(x,t)=\nabla s(x,t)$ and find a scalar potential $s$ that minimizes the total kinetic energy (action):
 
 \\[
-\mathcal{A}[v] = \frac12 \int_0^1 \int_{\mathbb{R}^d} \|v(x,t)\|^2\,p_t(x)\,dx\,dt
+\mathcal{A}[v] = \frac12 \int_{0}^{1} \int_{\mathbb{R}^d} \|v(x,t)\|^2\,p_t(x)\,dx\,dt
 = \frac12 \int_0^1 \int \|\nabla s(x,t)\|^2\,p_t(x)\,dx\,dt.
 \\]
 
