@@ -2,16 +2,17 @@
 layout: post
 title: "[Paper reading] Action Matching: Learning Stochastic Dynamics from Samples"
 ---
-Learning dynamical systems from data is a central problem across physics, biology, and machine learning. The recent paper *"Action Matching: Learning Stochastic Dynamics from Samples"* (Neklyudov et al., 2023) proposes a method to recover time-evolving dynamics from static snapshots. Unlike traditional approaches requiring full trajectories, Action Matching (AM) operates on independently drawn samples from time-indexed distributions $\{p_t(x)\}_{t\in[0,1]}$. This opens the door to learning in domains where time series data is unavailable, such as single-cell biology or diffusion models.
+
+Learning dynamical systems from data is a central problem across physics, biology, and machine learning. The recent paper **"Action Matching: Learning Stochastic Dynamics from Samples"** (Neklyudov et al., 2023) proposes a method to recover time-evolving dynamics from static snapshots. Unlike traditional approaches requiring full trajectories, Action Matching (AM) operates on independently drawn samples from time-indexed distributions $\{p_t(x)\}_{t\in[0,1]}$. This opens the door to learning in domains where time series data is unavailable, such as single-cell biology or diffusion models.
 
 This article offers an intuitive walkthrough of the motivation, formulation, and extensions of Action Matching. It also compares AM with Flow Matching (FM), clarifies the roles of distributions and potentials in dynamics, and interprets the algorithm’s behavior with mathematical precision.
 
-### Problem Setup and Core Idea
+## Problem Setup and Core Idea
 
 We are given i.i.d. samples $\{x_i^t\}\sim p_t(x)$ at different time points $t\in[0,1]$. The goal is to learn a velocity field $v(x,t)$ such that the evolution of $p_t(x)$ satisfies the **continuity equation**:
 
 \\[
-\partial_t p_t(x) + \nabla\cdot\bigl(p_t(x)\,v(x,t)\bigr) = 0.
+\partial_t p_t(x) + \nabla\cdot\bigl(p_t(x)\,v(x,t)\bigr)=0.
 \\]
 
 This equation ensures conservation of probability mass over time.
@@ -25,123 +26,129 @@ AM proposes to restrict $v(x,t)=\nabla s(x,t)$ and find a scalar potential $s$ t
 
 This is rooted in the **principle of least action**: among all admissible flows satisfying the continuity equation, nature prefers the one minimizing energy.
 
-### Understanding $p_t(x)$, $s_t(x)$, and $v_t(x)$
+## Understanding $p_t(x)$, $s_t(x)$, and $v_t(x)$
 
-To intuitively grasp the method, consider:
+- **$p_t(x)$**: probability density at time $t$. It describes where mass concentrates.
+- **$s_t(x)$**: scalar potential (a “height map” or energy landscape) whose gradient drives motion.
+- **$v_t(x)=\nabla s_t(x)$**: velocity field; mass flows along the potential gradient.
 
-- **$p_t(x)$**: probability density at time $t$. It describes the evolving mass distribution.
-- **$s_t(x)$**: scalar potential. The “energy landscape” inducing motion.
-- **$v_t(x)=\nabla s_t(x)$**: velocity field. Mass flows in the direction of the potential gradient.
+This implies the flow is **curl-free** ($\nabla\times v=0$), consistent with conservative systems. Modeling $v$ via a scalar $s$ reduces parameter complexity.
 
-This setup implies the dynamics are curl-free (i.e.\ $\nabla\times v=0$), consistent with conservative systems. The gradient assumption also reduces parameter complexity: we model a scalar $s$ rather than a full vector field.
+## Comparing Action Matching and Flow Matching
 
-Imagine $s_t(x)$ as a topographic map—particles slide along the gradient $\nabla s_t(x)$, and $p_t(x)$ changes as mass flows down this landscape.
+**Flow Matching (FM)** and **Action Matching (AM)** both learn $v(x,t)$ from unpaired time-sliced data.
 
-### Comparing Action Matching and Flow Matching
+**Shared:** access only to marginals $p_t$, no trajectories, no adversarial training.
 
-**Flow Matching (FM)** and **Action Matching (AM)** both recover time-dependent vector fields $v(x,t)$ from static time-sliced data.
-
-**Shared structure:**
-- Access only to samples from $\{p_t(x)\}$, not trajectories.
-- Learn $v(x,t)$ that induces valid evolution.
-- No likelihood or adversarial training.
-
-**Key differences:**
-- FM assumes access to point pairs $(x_0,x_1)$ and minimizes:
-  \\[
-  \mathbb{E}_{t,x_0,x_1}\bigl[\|v(x(t),t)-\dot x(t)\|^2\bigr],
-  \\]
-  where $x(t)=(1-t)x_0+tx_1$.
-- AM uses no explicit pairings and instead minimizes:
-  \\[
-  \mathcal{A}[v]=\frac12\int_0^1\!\int\|v(x,t)\|^2\,p_t(x)\,dx\,dt.
-  \\]
-
-Thus, FM does **local pointwise matching**, while AM performs **global energy minimization**.
-
-### Method and Loss Function of Action Matching
-
-To estimate $s$, AM constructs the **Action Matching loss**:
+**FM** minimizes local velocity mismatch:
 
 \\[
-L_{AM}(s)=\mathcal{A}(s)-\mathcal{K}_{\text{AM}}(s),
+\mathbb{E}_{t,x_0,x_1}\bigl[\|v(x(t),t)-\dot x(t)\|^2\bigr],
 \\]
 
-where $\mathcal{K}_{\text{AM}}(s)$ is a cross-term derived via integration by parts:
+with $x(t)=(1-t)x_0+tx_1$.
+
+**AM** minimizes global kinetic energy:
 
 \\[
-\int_X\langle\nabla g,f\rangle\,dx
-=\int_{\partial X} g\,f\cdot d\mathbf{n}
--\int_X g\,(\nabla\cdot f)\,dx.
+\mathcal{A}[v]=\frac12\int_0^1\!\int\|v(x,t)\|^2\,p_t(x)\,dx\,dt.
 \\]
 
-Using the continuity equation $\nabla\cdot\bigl(q_t\nabla s_t^*\bigr)=-\partial_t q_t$, one gets:
+## Key Mathematical Tools
+
+### Divergence Theorem (Gauss’s Theorem)
 
 \\[
-\mathcal{K}_{\text{AM}}(s)
-=-\int_0^1\!\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
+\int_X (\nabla\cdot F)\,dx = \int_{\partial X} F\cdot d\mathbf{n}.
 \\]
 
-Thus, $L_{AM}$ measures the kinetic energy gap between the model and the true process. Minimizing $L_{AM}$ maximizes a **variational lower bound** on the ground-truth action $\mathcal{A}(s^*)$.
+*Intuition:* Divergence measures net outflow per unit volume; integrating over a region gives total flux through its boundary.
 
-### On Paths: AM vs. Wasserstein Geodesics
+### Product Rule for Divergence
 
-Figure 2 shows that AM’s inferred path need not coincide with the **Wasserstein-2 ($\mathcal{W}_2$) geodesic** between $p_0$ and $p_1$:
+\\[
+\nabla\cdot(g\,f)=\langle\nabla g, f\rangle + g\,(\nabla\cdot f).
+\\]
 
-- **$\mathcal{W}_2$ geodesic** solves
-  \\[
-  \inf_{\gamma}\Bigl\{\int_0^1\!\int\|v\|^2p_t\,dx\,dt\quad\text{s.t.}\quad
-  \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\},
-  \\]
-  yielding a time-varying, bespoke velocity field.
-- **AM** fixes $v(x,t)=\nabla s(x,t)$ globally to fit all $p_t$, possibly deviating from the shortest OT path.
+*Intuition:* Change in the product $g\,f$ comes from both $g$ varying along $f$ and divergence of $f$ weighted by $g$.
 
-Hence, AM offers **dynamically consistent** but flexible transport, even when empirical marginals lie off the OT geodesic.
+### Integration by Parts for Divergence
 
-### Entropic Action Matching (eAM)
+\\[
+\int_X \langle\nabla g, f\rangle\,dx
+= \int_{\partial X} g\,f\cdot d\mathbf{n} - \int_X g\,(\nabla\cdot f)\,dx.
+\\]
 
-For **stochastic** dynamics, AM extends to **Entropic Action Matching**. eAM minimizes the expected energy of random paths plus an entropy penalty:
+*Intuition:* Transfers a derivative from $g$ to $f$, producing a boundary term minus a volume term.
+
+## Method and Loss Function of Action Matching
+
+AM defines the loss:
+
+\\[
+L_{AM}(s)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s),
+\\]
+
+where the cross-term $\mathcal{K}_{\mathrm{AM}}(s)$ is obtained by applying the above IBP to $f=q_t\nabla s_t^*$ and $g=s_t$, then using
+
+\\[
+\nabla\cdot(q_t
+abla s_t^*)=-\partial_t q_t
+\\]
+
+to yield:
+
+\\[
+\mathcal{K}_{\mathrm{AM}}(s)=-\int_0^1\!\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
+\\]
+
+Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
+
+## On Paths: AM vs. Wasserstein Geodesics
+
+Figure 2 shows AM’s path need not match the **Wasserstein-2 ($\mathcal{W}_2$) geodesic** between $p_0,p_1$, which solves:
+
+\\[
+\inf_{\{p_t,v\}}\Bigl\{\int_0^1\!\int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
+\\]
+
+AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
+
+## Entropic Action Matching (eAM)
+
+For stochastic dynamics, eAM minimizes:
 
 \\[
 \mathbb{E}_{x_{0:T}}\Bigl[\int_0^1\!\tfrac12\|\dot x_t\|^2dt\Bigr]
-+\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathbb{W}),
++\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathbb{W}).
 \\]
 
-where $\mathbb{P}$ is the learned path distribution and $\mathbb{W}$ is Brownian motion. This is the **Schrödinger bridge** formulation, making eAM robust to noise.
+This links to the **Schrödinger bridge** and adds an entropy penalty.
 
-### Unbalanced Action Matching (uAM)
+## Unbalanced Action Matching (uAM)
 
-When mass is not conserved, uAM generalizes the continuity equation:
+When mass varies, uAM generalizes:
 
 \\[
-\partial_t q_t(x)+\nabla\cdot\bigl(q_t(x)\,v(x,t)\bigr)=r_t(x),
+\partial_t q_t+\nabla\cdot(q_t v)=r_t,
 \\]
 
-where $r_t(x)$ is a **mass source/sink**. The uAM loss becomes:
+with source $r_t(x)$, and loss:
 
 \\[
-L_{uAM}(s,r)
-=\mathcal{A}(s)-\mathcal{K}_{\text{AM}}(s)
+L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s)
 +\lambda\int_0^1\!\int r_t(x)^2\,dx\,dt.
 \\]
 
-This handles scenarios like cell division/death, approximate generative sampling, and time-sliced scRNA-seq.
+This handles birth/death, sampling errors, and unnormalized marginals.
 
-### Why Densities May Be Unnormalized in Diffusion Models
+## Why Densities May Be Unnormalized in Diffusion Models
 
-In diffusion models, intermediate $q_t(x)$ are often:
+Intermediate $q_t(x)$ often are unnormalized, noisy, or lose mass due to discretization and score approximations. uAM’s source term $r_t(x)$ absorbs these discrepancies.
 
-- **Unnormalized**: $q_t(x)\propto p_t(x)$,
-- **Noisy**: due to SDE discretization,
-- **Mass-leaky**: score models ignore normalization.
+## Conclusion
 
-uAM’s source term $r_t(x)$ and penalty absorb these mass discrepancies, improving robustness in practice.
-
-### Conclusion
-
-Action Matching provides a principled framework for learning dynamics from unpaired snapshots, grounded in physics and optimal transport. Compared to Flow Matching, AM emphasizes **global energy efficiency** and **physical realism**. Its extensions eAM and uAM tackle stochasticity and mass imbalance, broadening applicability to modern generative modeling and scientific fields.
+Action Matching provides a physics-grounded framework for learning dynamics from static snapshots, emphasizing global energy minimization under continuity. Compared to FM’s local matching, AM focuses on physical realism. Extensions eAM and uAM address stochasticity and mass imbalance, making AM versatile for modern generative modeling and scientific applications.
 
 \\[
-\boxed{\text{Action Matching = Least Action + Continuity Constraint + Sample-Based Optimization}}
-\\]
-
+\boxed{\text{Action Matching = Least Action + Continuity + Sample-Based Optimization}}\\]
