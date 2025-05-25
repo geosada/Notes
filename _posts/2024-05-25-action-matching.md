@@ -19,7 +19,7 @@ AM proposes to restrict $v(x,t)=\nabla s(x,t)$ and find a scalar potential $s$ t
 
 \\[
 \mathcal{A}[v] = \frac12 \int_{0}^{1} \int_{\mathbb{R}^d} \|v(x,t)\|^2\,p_t(x)\,dx\,dt
-= \frac12 \int_0^1 \int \|\nabla s(x,t)\|^2\,p_t(x)\,dx\,dt.
+= \frac12 \int_{0}^{1} \int \|\nabla s(x,t)\|^2\,p_t(x)\,dx\,dt.
 \\]
 
 This is rooted in the **principle of least action**: among all admissible flows satisfying the continuity equation, nature prefers the one minimizing energy.
@@ -49,28 +49,28 @@ with $x(t)=(1-t)x_0+tx_1$.
 **AM** minimizes global kinetic energy:
 
 \\[
-\mathcal{A}[v]=\frac12\int_0^1\!\int\|v(x,t)\|^2\,p_t(x)\,dx\,dt.
+\mathcal{A}[v]=\frac12\int_{0}^{1}\!\int\|v(x,t)\|^2\,p_t(x)\,dx\,dt.
 \\]
 
-## Key Mathematical Tools
+### Key Mathematical Tools
 
-### Divergence Theorem (Gauss’s Theorem)
+*Divergence Theorem (Gauss’s Theorem).*
 
 \\[
 \int_X (\nabla\cdot F)\,dx = \int_{\partial X} F\cdot d\mathbf{n}.
 \\]
 
-*Intuition:* Divergence measures net outflow per unit volume; integrating over a region gives total flux through its boundary.
+Intuition: Divergence measures net outflow per unit volume; integrating over a region gives total flux through its boundary.
 
-### Product Rule for Divergence
+*Product Rule for Divergence.*
 
 \\[
 \nabla\cdot(g\,f)=\langle\nabla g, f\rangle + g\,(\nabla\cdot f).
 \\]
 
-*Intuition:* Change in the product $g\,f$ comes from both $g$ varying along $f$ and divergence of $f$ weighted by $g$.
+Intuition: Change in the product $g\,f$ comes from both $g$ varying along $f$ and divergence of $f$ weighted by $g$.
 
-### Integration by Parts for Divergence
+*Integration by Parts for Divergence.*
 
 \\[
 \int_X \langle\nabla g, f\rangle\,dx
@@ -79,7 +79,7 @@ with $x(t)=(1-t)x_0+tx_1$.
 
 *Intuition:* Transfers a derivative from $g$ to $f$, producing a boundary term minus a volume term.
 
-## Method and Loss Function of Action Matching
+## Method and Loss Function
 
 AM defines the loss:
 
@@ -97,7 +97,7 @@ abla s_t^*)=-\partial_t q_t
 to yield:
 
 \\[
-\mathcal{K}_{\mathrm{AM}}(s)=-\int_0^1\!\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
+\mathcal{K}_{\mathrm{AM}}(s)=-\int_{0}^{1}\!\int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
 \\]
 
 Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
@@ -107,7 +107,7 @@ Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on t
 Figure 2 shows AM’s path need not match the **Wasserstein-2 ($\mathcal{W}_2$) geodesic** between $p_0,p_1$, which solves:
 
 \\[
-\inf_{\{p_t,v\}}\Bigl\{\int_0^1\!\int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
+\inf_{\{p_t,v\}}\Bigl\{\int_{0}^{1}\!\int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
 \\]
 
 AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
@@ -117,8 +117,8 @@ AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
 For stochastic dynamics, eAM minimizes:
 
 \\[
-\mathbb{E}_{x_{0:T}}\Bigl[\int_0^1\!\tfrac12\|\dot x_t\|^2dt\Bigr]
-+\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathbb{W}).
+\mathbb{E}_{x_{0:T}}\Bigl[\int_{0}^{1}\!\tfrac12\|\dot x_t\|^2dt\Bigr]
++\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathcal{W}).
 \\]
 
 This links to the **Schrödinger bridge** and adds an entropy penalty.
@@ -135,7 +135,7 @@ with source $r_t(x)$, and loss:
 
 \\[
 L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s)
-+\lambda\int_0^1\!\int r_t(x)^2\,dx\,dt.
++\lambda\int_{0}^{1}\!\int r_t(x)^2\,dx\,dt.
 \\]
 
 This handles birth/death, sampling errors, and unnormalized marginals.
