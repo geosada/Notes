@@ -96,7 +96,7 @@ where the cross-term $\mathcal{K}_{\mathrm{AM}}(s)$ is obtained by applying the 
 to yield:
 
 \\[
-\mathcal{K}_{\mathrm{AM}}(s)=-\int_{0}^{1} \int s_t(x)\,\partial_t q_t(x)\,dx\,dt.
+\mathcal{K}_{\mathrm{AM}}(s)=-\int_{0}^{1} \int s_{t}(x)\,\partial_{t} q_{t}(x)\,dx\,dt.
 \\]
 
 Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
