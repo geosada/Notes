@@ -133,8 +133,7 @@ When mass varies, uAM generalizes:
 with source $r_t(x)$, and loss:
 
 \\[
-L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s)
-+\lambda\int_{0}^{1} \int r_t(x)^2\,dx\,dt.
+L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{AM}(s) +\lambda \int_{0}^{1} \int r_{t}(x)^2 dx dt.
 \\]
 
 This handles birth/death, sampling errors, and unnormalized marginals.
