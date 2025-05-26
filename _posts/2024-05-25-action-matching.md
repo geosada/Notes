@@ -3,7 +3,8 @@ layout: post
 title: "[Paper reading] Action Matching: Learning Stochastic Dynamics from Samples"
 ---
 
-Learning dynamical systems from data is a central problem across physics, biology, and machine learning. The recent paper **"Action Matching: Learning Stochastic Dynamics from Samples"** (Neklyudov et al., 2023) proposes a method to recover time-evolving dynamics from static snapshots. Unlike traditional approaches requiring full trajectories, Action Matching (AM) operates on independently drawn samples from time-indexed distributions $\{p_t(x)\}_{t\in[0,1]}$. This opens the door to learning in domains where time series data is unavailable, such as single-cell biology or diffusion models.
+Learning dynamical systems from data is a central problem across physics, biology, and machine learning. 
+The paper **"Action Matching: Learning Stochastic Dynamics from Samples"** (Neklyudov et al., 2023) proposes a method to recover time-evolving dynamics from static snapshots. Unlike traditional approaches requiring full trajectories, Action Matching (AM) operates on independently drawn samples from time-indexed distributions $\{p_t(x)\}_{t\in[0,1]}$. This opens the door to learning in domains where time series data is unavailable, such as single-cell biology or diffusion models.
 
 ## Problem Setup and Core Idea
 
@@ -24,19 +25,22 @@ AM proposes to restrict $v(x,t)=\nabla s(x,t)$ and find a scalar potential $s$ t
 
 This is rooted in the **principle of least action**: among all admissible flows satisfying the continuity equation, nature prefers the one minimizing energy.
 
-## Understanding $p_t(x)$, $s_t(x)$, and $v_t(x)$
+## $p_t$, $s_t$, and $v_t$
 
 - **$p_t(x)$**: probability density at time $t$. It describes where mass concentrates.
 - **$s_t(x)$**: scalar potential (a “height map” or energy landscape) whose gradient drives motion.
 - **$v_t(x)=\nabla s_t(x)$**: velocity field; mass flows along the potential gradient.
 
-This implies the flow is **curl-free** ($\nabla\times v=0$), consistent with conservative systems. Modeling $v$ via a scalar $s$ reduces parameter complexity.
+Conceptually, we begin with $s$; this choice automatically specifies $v$, and from that $p$ is derived.
+In Monge-Ampère or Kantorovich theory,
+$s$ is a convex potential whose gradient gives the optimal map from $p_0$ to $p_1$.
+In practice, modeling $v$ via a scalar $s$ reduces parameter complexity.
 
-## Comparing Action Matching and Flow Matching
+## Vs. Flow Matching
 
-**Flow Matching (FM)** and **Action Matching (AM)** both learn $v(x,t)$ from unpaired time-sliced data.
-
-**Shared:** access only to marginals $p_t$, no trajectories, no adversarial training.
+Flow Matching (FM) and Action Matching (AM) both learn $v(x,t)$ from unpaired time-sliced data.
+Both access only to marginals $p_t$, no trajectories, no adversarial training,
+but the differences are as follows.
 
 **FM** minimizes local velocity mismatch:
 
@@ -49,9 +53,41 @@ with $x(t)=(1-t)x_0+tx_1$.
 **AM** minimizes global kinetic energy:
 
 \\[
-\mathcal{A}[v]=\frac12\int_{0}^{1} \int\|v(x,t)\|^2\,p_t(x)\,dx\,dt.
+\mathcal{A}[v]=\frac12\int_{0}^{1} \int\|v(x,t)\|^2\,p_t(x)\,dx\,dt,
+\\]
+which corresponds to the Benamou–Brenier action.
+
+** Curl-free
+The continuity equation by itself merely enforces mass conservation;
+It says nothing about whether $v$ has curl or not. 
+You can satisfy mass conservation with flow fields that swirl and vortex just fine.
+
+The no curl ($\nabla\times v=0$) is guaranteed by the kinetic-energy minimization.
+The AM  selects the curl-free (gradient) part as optimal, *because any rotational component only wastes energy.*
+This can be explained by the Helmholtz decomposition.
+
+## Objective Function
+
+\\[
+\mathrm{ACTION\text{-}GAP}\bigl(s_t, s_t^{*}\bigr)
+=
+K \;+\; \mathcal{L}_{\mathrm{AM}}(s_t).
 \\]
 
+Here $\mathcal{L}_{\mathrm{AM}}(s)$ is the Action Matching objective, which we minimize:
+
+\\[
+\mathcal{L}_{\mathrm{AM}}(s)
+:=
+\mathbb{E}_{q_0(x)}\bigl[s_0(x)\bigr] - \mathbb{E}_{q_1(x)}\bigl[s_1(x)\bigr]
++
+\int_{0}^{1}
+\mathbb{E}_{q_t(x)}\!\Bigl[\tfrac{1}{2}\,\|\nabla s_t(x)\|^2
++\tfrac{\partial s_t}{\partial t}(x)\Bigr]
+\,dt.
+\\]
+
+Minimizing $\mathcal{L}_{\mathrm{AM}}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
 ### Key Mathematical Tools
 
 *Divergence Theorem (Gauss’s Theorem).*
@@ -79,26 +115,6 @@ Intuition: Change in the product $g\,f$ comes from both $g$ varying along $f$ an
 
 *Intuition:* Transfers a derivative from $g$ to $f$, producing a boundary term minus a volume term.
 
-## Method and Loss Function
-
-AM defines the loss:
-
-\\[
-L_{AM}(s)=\mathcal{A}(s)-\mathcal{K}_{\mathrm{AM}}(s),
-\\]
-
-where the cross-term $\mathcal{K}_{\mathrm{AM}}(s)$ is obtained by applying the above IBP to $f=q_t\nabla s_t^*$ and $g=s_t$, then using
-
-\\[
-\nabla\cdot(q_t \nabla s_t^*)=-\partial_t q_t
-\\]
-
-to yield:
-\\[
-    \mathcal{K}_{\mathrm{AM}}(s) = - \int_{0}^{1} \int s_{t}(x) \partial_{t} q_{t}(x) dx dt.
-\\]
-
-Minimizing $L_{AM}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
 
 ## On Paths: AM vs. Wasserstein Geodesics
 
