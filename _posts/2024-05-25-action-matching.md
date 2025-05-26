@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Paper reading] Action Matching: Learning Stochastic Dynamics from Samples"
+title: "Paper reading: Action Matching: Learning Stochastic Dynamics from Samples"
 ---
 
 Learning dynamical systems from data is a central problem across physics, biology, and machine learning. 
@@ -45,7 +45,7 @@ but the differences are as follows.
 **FM** minimizes local velocity mismatch:
 
 \\[
-\mathbb{E}_{t,x_0,x_1}\bigl[\|v(x(t),t)-\dot x(t)\|^2\bigr],
+\mathop{\mathbb{E}}\_{t,x_0,x_1}\bigl[\|v(x(t),t)-\dot x(t)\|^2\bigr],
 \\]
 
 with $x(t)=(1-t)x_0+tx_1$.
@@ -57,7 +57,7 @@ with $x(t)=(1-t)x_0+tx_1$.
 \\]
 which corresponds to the Benamou–Brenier action.
 
-** Curl-free
+### Curl-free
 The continuity equation by itself merely enforces mass conservation;
 It says nothing about whether $v$ has curl or not. 
 You can satisfy mass conservation with flow fields that swirl and vortex just fine.
@@ -68,27 +68,40 @@ This can be explained by the Helmholtz decomposition.
 
 ## Objective Function
 
+Let $s_t^\*$ be the ground-trueth action.
+Like score matching, we obtain $s_t$ that approximates $s_t^\*$ by minimizing
 \\[
-\mathrm{ACTION\text{-}GAP}\bigl(s_t, s_t^{*}\bigr)
-=
-K \;+\; \mathcal{L}_{\mathrm{AM}}(s_t).
-\\]
-
-Here $\mathcal{L}_{\mathrm{AM}}(s)$ is the Action Matching objective, which we minimize:
-
-\\[
-\mathcal{L}_{\mathrm{AM}}(s)
+\mathrm{ACTION\text{-}GAP}(s, s^\*)
 :=
-\mathbb{E}_{q_0(x)}\bigl[s_0(x)\bigr] - \mathbb{E}_{q_1(x)}\bigl[s_1(x)\bigr]
-+
+\frac{1}{2}
 \int_{0}^{1}
-\mathbb{E}_{q_t(x)}\!\Bigl[\tfrac{1}{2}\,\|\nabla s_t(x)\|^2
-+\tfrac{\partial s_t}{\partial t}(x)\Bigr]
+\mathop{\mathbb{E}}\_{x \sim q_{t}}
+\bigl\|\nabla s_t(x)\;-\;\nabla s_t^\* (x)\bigr\|^2
 \,dt.
 \\]
+We can decompose it as
+\\[
+\mathrm{ACTION\text{-}GAP}\bigl(s_t, s_t^\* \bigr)
+= K + \mathcal{L}\_{\mathrm{AM}}(s_t),
+\\]
+where $\mathcal{L}\_{\mathrm{AM}}(s)$ is the Action Matching objective, which we minimize:
 
-Minimizing $\mathcal{L}_{\mathrm{AM}}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^*)$.
-### Key Mathematical Tools
+\\[
+\mathcal{L}\_{\mathrm{AM}}(s)
+:=
+\mathop{\mathbb{E}}\_{x \sim q_0}\bigl[s_0(x)\bigr] - \mathop{\mathbb{E}}\_{x \sim q_1}\bigl[s_1(x)\bigr]
++
+\int_{0}^{1}
+\mathop{\mathbb{E}}\_{x \sim q_t} \Bigl[\tfrac{1}{2}\,\|\nabla s_t(x)\|^2
++\tfrac{\partial }{\partial t}s_t(x)\Bigr]
+\,dt.
+<!--
+-->
+\\]
+
+Minimizing $\mathcal{L}_{\mathrm{AM}}$ corresponds to maximizing a **variational lower bound** on the true action $\mathcal{A}(s^\*)$.
+
+**Mathematical tools** to derive the above is as follows:
 
 *Divergence Theorem (Gauss’s Theorem).*
 
@@ -116,30 +129,53 @@ Intuition: Change in the product $g\,f$ comes from both $g$ varying along $f$ an
 *Intuition:* Transfers a derivative from $g$ to $f$, producing a boundary term minus a volume term.
 
 
-## On Paths: AM vs. Wasserstein Geodesics
+## Vs. Wasserstein Geodesics
 
-Figure 2 shows AM’s path need not match the **Wasserstein-2 ($\mathcal{W}_2$) geodesic** between $p_0,p_1$, which solves:
-
-\\[
-\inf_{\{p_t,v\}}\Bigl\{\int_{0}^{1} \int\|v\|^2\,p_t\,dx\,dt : \partial_t p_t+\nabla\cdot(p_t v)=0\Bigr\}.
-\\]
-
+The AM’s path need not match the **Wasserstein-2 ($\mathcal{W}\_2$) geodesic** between $p_0,p_1$.
 AM fixes $v=\nabla s$ globally, trading shortest path for modeling flexibility.
 
 ## Entropic Action Matching (eAM)
+In standard Action Matching, we assume the system evolves via a velocity field that deterministically moves particles along paths that minimize total kinetic energy.
+But many real-world systems — especially in biology, physics, and ML — are stochastic:
+- Particles or agents diffuse randomly (e.g., Brownian motion, gene expression noise),
+- The system's behavior includes uncertainty, even if the macroscopic distribution is known.
+
+So, deterministic paths aren't enough to capture this — we need to model distributions over paths.
+Instead of minimizing just kinetic energy of deterministic paths,
+minimize the expected kinetic energy over stochastic paths,
+plus a penalty on randomness (i.e., entropy regularization).
+This is deeply inspired by the Schrödinger bridge problem, which is a stochastic version of optimal transport.
 
 For stochastic dynamics, eAM minimizes:
 
 \\[
-\mathbb{E}_{x_{0:T}}\Bigl[\int_{0}^{1} \tfrac12\|\dot x_t\|^2dt\Bigr]
+\mathop{\mathbb{E}}\_{x_{0:T}}\Bigl[\int_{0}^{1} \tfrac12\|\dot x_t\|^2dt\Bigr]
 +\tau\,\mathrm{KL}(\mathbb{P}\Vert\mathcal{W}).
 \\]
-
-This links to the **Schrödinger bridge** and adds an entropy penalty.
+The second term is the entropy penalty, which prevents the model from just pushing everything into deterministic paths and forces a smooth, stochastic interpolation.
 
 ## Unbalanced Action Matching (uAM)
+Standard Action Matching (and even Entropic AM) assumes mass conservation:
+\\[
+\int q_t(x)dx = 1
+\quad \text{for all } t \in [0,1].
+\\]
+But in practice:
+- The forward process may push probability into very diffuse tails (low density, hard to sample),
+- The reverse process may be approximated imperfectly by a neural network,
+- During training, you often only approximate or reweight 
+ $p_t(x)$ using samples from $p_0(x)$ or $p_1(x)$.
+- Or you're using unnormalized intermediate distributions, e.g., through importance weighting or score matching.
 
-When mass varies, uAM generalizes:
+So intermediate densities $p_t(x)$
+used in learning or sampling may not strictly integrate to 1 — they may gain or lose mass.
+Indeed, in score-based diffusion models,
+you may not know the exact normalization of $p_t(x)$
+at intermediate times — only its shape (i.e., unnormalized density).
+So effectively, you're working with an unnormalized proxy.
+
+When mass varies, uAM 
+introduces the source term $r_t(x)$ that adjusts for the “extra” or “missing” probability mass along the path — like a buffer zone for approximation errors as
 
 \\[
 \partial_t q_t+\nabla\cdot(q_t v)=r_t,
@@ -148,14 +184,10 @@ When mass varies, uAM generalizes:
 with source $r_t(x)$, and loss:
 
 \\[
-L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}_{AM}(s) +\lambda \int_{0}^{1} \int r_{t}(x)^2 dx dt.
+L_{uAM}(s,r)=\mathcal{A}(s)-\mathcal{K}\_{AM}(s) +\lambda \int_{0}^{1} \int r_{t}(x)^2 dx dt.
 \\]
 
 This handles birth/death, sampling errors, and unnormalized marginals.
-
-## Why Densities May Be Unnormalized in Diffusion Models
-
-Intermediate $q_t(x)$ often are unnormalized, noisy, or lose mass due to discretization and score approximations. uAM’s source term $r_t(x)$ absorbs these discrepancies.
 
 ## Conclusion
 
