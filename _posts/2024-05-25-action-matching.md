@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Paper reading: Action Matching: Learning Stochastic Dynamics from Samples"
+title: "Paper reading: \"Action Matching: Learning Stochastic Dynamics from Samples\""
 ---
 
 Learning dynamical systems from data is a central problem across physics, biology, and machine learning. 
