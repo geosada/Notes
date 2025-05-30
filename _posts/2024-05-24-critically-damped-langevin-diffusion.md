@@ -8,6 +8,8 @@ We’ll build up from first principles—mass, forces, and noise—to show how a
 
 ## Overdamped vs. Underdamped Langevin: Why Momentum?
 
+We consider a stochastic process in a quadratic potential $U(x) = \frac12 \beta \|x\|^2$.
+
 **Overdamped Langevin (First-Order, No Momentum)**
 \\[
 \mathrm{d}x_t = -\nabla U(x_t)\,\mathrm{d}t + \sqrt{2}\,\mathrm{d}W_t

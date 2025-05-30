@@ -109,6 +109,7 @@ Minimizing $\mathcal{L}_{\mathrm{AM}}$ corresponds to maximizing a **variational
 \int_X (\nabla\cdot F)\,dx = \int_{\partial X} F\cdot d\mathbf{n}.
 \\]
 
+
 Intuition: Divergence measures net outflow per unit volume; integrating over a region gives total flux through its boundary.
 
 *Product Rule for Divergence.*
@@ -116,6 +117,28 @@ Intuition: Divergence measures net outflow per unit volume; integrating over a r
 \\[
 \nabla\cdot(g\,f)=\langle\nabla g, f\rangle + g\,(\nabla\cdot f).
 \\]
+
+Consider a scalar function $g$ and a vector field $f$.
+\\[
+    \nabla \cdot (g\,f)
+    = \sum_{i=1}^n \frac{\partial (g\,f_i)}{\partial x_i}.
+\\]
+By the product rule,
+\\[
+\frac{\partial (g\,f_i)}{\partial x_i}
+= \frac{\partial g}{\partial x_i}\,f_i
+\;+\;
+g\,\frac{\partial f_i}{\partial x_i}.
+\\]
+
+Summing over $i$,
+\\[
+\nabla \cdot (g\,f)
+= \sum_{i=1}^n \frac{\partial g}{\partial x_i}\,f_i
+\;+\;
+\sum_{i=1}^n g\,\frac{\partial f_i}{\partial x_i},
+\\]
+thus we get the rule.
 
 Intuition: Change in the product $g\,f$ comes from both $g$ varying along $f$ and divergence of $f$ weighted by $g$.
 
