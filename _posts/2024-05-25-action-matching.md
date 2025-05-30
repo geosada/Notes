@@ -149,6 +149,12 @@ Intuition: Change in the product $g\,f$ comes from both $g$ varying along $f$ an
 = \int_{\partial X} g\,f\cdot d\mathbf{n} - \int_X g\,(\nabla\cdot f)\,dx.
 \\]
 
+Replacing $F$ in the Divergence Theorem with $g\,f$ and using the product rule for fivergence gives
+\\[
+\int_X (\nabla\cdot g\,f)\,dx =  \int_X \bigr[ \langle\nabla g, f\rangle + g\,(\nabla\cdot f) \bigr] \,dx = \int_{\partial X} g\,f\cdot d\mathbf{n},
+\\]
+yielding the IBP for Divergence.
+
 *Intuition:* Transfers a derivative from $g$ to $f$, producing a boundary term minus a volume term.
 
 
