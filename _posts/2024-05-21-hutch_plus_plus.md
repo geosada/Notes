@@ -31,13 +31,17 @@ Let $A \in \mathbb{R}^{n\times n}$ be symmetric, with trace $\tau = \mathrm{tr}(
 
    - **Why?**  Write each random $s_{i}$ in the eigenbasis $\{v_{j}\}$:
      \\[
-       s_{i} = \sum_{j=1}^{n} (v_{j}^\top s_{i})\,v_{j},
+       s_{i} = \sum_{j=1}^{n} (v_{j}^\top s_{i})\,v_{j} = \sum_{j=1}^{n} c_{j}v_{j}, \quad c_{j} = v_{j}^\top s_{i},
      \\]
      and then
      \\[
-       y_{i} = A s_{i} = V\Lambda V^\top s_{i} = \sum_{j=1}^{n} \lambda_{j}(v_{j}^\top s_{i})\,v_{j}.
+       y_{i} = A s_{i} = V\Lambda V^\top s_{i} = V\Lambda V^\top (\sum_{j=1}^{n} c_{j}v_{j}) = V\Lambda (c_{1}, c_{2}, ...)^\top = \sum_{j=1}^{n} 
+       \lambda_{j}c_{j} v_{j} = \sum_{j=1}^{n} \lambda_{j}(v_{j}^\top s_{i})\,v_{j}.
      \\]
-     Each component along $v_{j}$ is **scaled by $\lambda_{j}$**, so large eigenvalues dominate $y_{i}$.
+     So the coefficient along eigenvector $v_{j}$ in $y_{j}$ is $\lambda_{j} c_{j}$, that is, 
+     each direction $v_{j}$ in the output $y_{j}$ is amplified by the factor $\lambda_{j}$.
+     The top-eigenvector directions get “stretched” more, making them stand out in the collection of all $y_{j}$.
+     So each $y_{j}$ tends to “point toward” the subspace spanned by the top eigenvectors.
 
 3. **Orthonormalize**: perform QR on $Y$ to get $Q \in \mathbb{R}^{n\times m_{1}}$ with orthonormal columns.  Theory shows
    \\[
