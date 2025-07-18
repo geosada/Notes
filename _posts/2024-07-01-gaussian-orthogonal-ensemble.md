@@ -80,7 +80,7 @@ The Frobenius inner product is defined as
 which induces the norm $\|A\|\_{F} = \sqrt{\mathrm{tr}(A^{2})}$, the natural “length” of a matrix.
 Using this metrics we identify $x \in \mathbb{R}^{N\times N}$ being spherical or isotropic, just like a standard multivariate normal in $\mathbb{R}^{N}$.
 The subspace of real symmetric $N\times N$ matrices has dimension
-$\tfrac{N(N+1)}{2}$.
+$\frac{N(N+1)}{2}$.
 A convenient orthonormal basis (w.r.t. $\langle\cdot,\cdot\rangle_{F}$) is
 \\\[
   E^{(i,i)} = E_{ii},
@@ -140,7 +140,7 @@ where $E_{ij}$ has a 1 in the $(i,j)$ slot and 0 elsewhere.
     = X_{ii}.
   \\]
   To make all directions isotropic, set
-  $\displaystyle \mathrm{Var}(X_{ii})=\tfrac{2}{N}.$
+  $\displaystyle \mathrm{Var}(X_{ii})=\frac{2}{N}.$
 
 Consequently, the Frobenius norm of a symmetric $X$ is
 \\[
@@ -162,18 +162,18 @@ so each independent coordinate contributes its variance to the total.
 We derive the GOE density $p(X)$.
 The entries of $X$ are chosen to satisfy isotropy:
 \\[
-X_{ij}\sim\mathcal{N} \bigl(0,\tfrac1N\bigr)\ (i\<j),
+X_{ij}\sim\mathcal{N} \bigl(0,\frac1N\bigr)\ (i\<j),
 \quad
-X_{ii}\sim\mathcal{N} \bigl(0,\tfrac2N\bigr).
+X_{ii}\sim\mathcal{N} \bigl(0,\frac2N\bigr).
 \\]
 Hence the joint density factorizes as
 \\[
 p(X) \;\propto\;
-\prod_{i\<j} \exp\ \Bigl(-\tfrac{N}{2}\,X_{ij}^2\Bigr)
+\prod_{i\<j} \exp\ \Bigl(-\frac{N}{2}\,X_{ij}^2\Bigr)
 \;\times\;
-\prod_{i=1}^{N} \exp\ \Bigl(-\tfrac{N}{4}\,X_{ii}^2\Bigr)
+\prod_{i=1}^{N} \exp\ \Bigl(-\frac{N}{4}\,X_{ii}^2\Bigr)
 =
-\exp \Bigl(-\tfrac{N}{2}\sum_{i\<j}X_{ij}^2 \;-\;\tfrac{N}{4}\sum_{i}X_{ii}^2\Bigr).
+\exp \Bigl(-\frac{N}{2}\sum_{i\<j}X_{ij}^2 \;-\;\frac{N}{4}\sum_{i}X_{ii}^2\Bigr).
 \\]
 
 Notice
@@ -187,16 +187,16 @@ Notice
 \\]
 
 Since $X_{ij}=X_{ji}$, one has
-$\displaystyle\sum_{i\<j}X_{ij}^2 = \tfrac12\sum_{i\neq j}X_{ij}^2$.  Therefore
+$\displaystyle\sum_{i\<j}X_{ij}^2 = \frac12\sum_{i\neq j}X_{ij}^2$.  Therefore
 
 \\[
--\tfrac{N}{2}\sum_{i\<j}X_{ij}^2
+-\frac{N}{2}\sum_{i\<j}X_{ij}^2
 \;-\;
-\tfrac{N}{4}\sum_{i}X_{ii}^2
+\frac{N}{4}\sum_{i}X_{ii}^2
 \;=\;
--\tfrac{N}{4}\sum_{i,j}X_{ij}^2
+-\frac{N}{4}\sum_{i,j}X_{ij}^2
 \;=\;
--\tfrac{N}{4}\mathrm{tr}\bigl(X^2\bigr).
+-\frac{N}{4}\mathrm{tr}\bigl(X^2\bigr).
 \\]
 
 Thus, the desity is 
@@ -204,7 +204,7 @@ Thus, the desity is
 \\[
 p(X)
 \;\propto\;
-e^{-\tfrac{N}{4}\mathrm{tr}(X^2)}.
+e^{-\frac{N}{4}\mathrm{tr}(X^2)}.
 \\]
 
 
