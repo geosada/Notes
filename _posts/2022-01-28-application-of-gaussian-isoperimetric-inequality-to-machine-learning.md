@@ -29,7 +29,7 @@ the effect of the noise of $\mathcal{N}(0, \sigma^{2} \text{I})$ is faint to the
 In other words, $f$ should predict the same class for $x_{c}$ as for $x$.
 Therefore, if the decision boundary that $f$ learns can be drawn
 so that it does not pass over the sphere on which $x_{c}$ are concentrated, the error rate will be almost zero.
-We denote the error rate of $f$ for $x_{c}$ by $\mu$ from here on.
+We denote the error rate of $f$ for $x_{c}$ by $\mu$.
 Considering a situation in which the decision boundary passes over the circle as shown in the figure below.
 In this case, the worst case is as shown in the red dot, and this can be $x_{adv}$.
 
