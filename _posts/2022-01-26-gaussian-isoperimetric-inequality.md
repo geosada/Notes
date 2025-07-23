@@ -2,7 +2,7 @@
 layout: post
 title: "Intuition behind Gaussian isoperimetric inequality"
 ---
-Some of the intuition behind the theorem of Gaussian Isoperimetric Inequality that I have will be presented in this post.
+This post is about some of the intuition behind the theorem of Gaussian Isoperimetric Inequality that I have.
 
 ## Isoperimetric Inequality and $\epsilon$-extension
 Before considering the Gaussian measure, we begin with something simpler.
@@ -44,7 +44,8 @@ Instead of the area $\mu$ earlier, we consider the gaussian measure $\gamma$.
 
 $\gamma(A)$ is something like the density assigned to the entire region $A$ in the Gaussian distribution in $n$-dimensional space.
 The closer $A$ is to the mean, the larger $\gamma(A)$ becomes.
-As before, $\epsilon$-extension of $A$ is $A_{\epsilon} = A + \epsilon B_{n}$, where $B_{n}$ is an unit ball in $n$ dimension space.
+We express $\epsilon$-extension of $A$ as $A_{\epsilon} = A + \epsilon B_{n}$, where $B_{n}$ is an unit ball in $n$ dimension space.
+$\epsilon$-expansion can be thought of as covering $A$ by a huge number of tiny balls, or hyperspheres, with radius $\epsilon$ centered on every point of $A$.
 Then, Gaussian isoperimetric inequality says
 \\[ 
     \Phi^{-1} ( \gamma(A + \epsilon B_{n})) \geq \Phi^{-1} ( \gamma(A)) + \epsilon, \label{eq:1}\tag{1}
@@ -56,7 +57,9 @@ It is saying that $\epsilon$-extension of $A$ makes the yellow line longer than 
 
 We saw that, when $A \subset \mathbb{R}^{2}$ is a circle, the length of the string is the shortest,
 which means that the variation due to $\epsilon$-extension is minimum.
-In Gaussian measure, when $A$ is the half space $H = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a \\}$, the change due to $\epsilon$-extension is minimum,
+We consider a case where $A$ is the half space $H = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a \\}$ in Gaussian measure,
+where $u$ is a unit vector, along which $H$ is aligned, and $a$ is the cutoff level of the projection onto $u$.
+Then, the change due to $\epsilon$-extension is minimum for $H$ among all $A$,
 i.e., $\gamma(A + \epsilon B_{n}) \geq \gamma(H + \epsilon B_{n})$ for all $A$.
 
 It is difficult to get an intuition as to all this, but let me leave this for now and move on.
@@ -78,9 +81,9 @@ Since $H_{\epsilon}$ can be writen as $H_{\epsilon} = \\{ x \in \mathbb{R}^{n}: 
 \\]
 Thus we know that if $A=H$, then the equality holds in Eq.$\,$($\ref{eq:1}$).
 
-Finally, I would like to address what I have postponed: why $\gamma(A) \geq \gamma(H$.
-To be honest, I cannot say that I understand it clearly.
-However, based on what we saw in Isoperimetric Inequality, we can develop the following intuition.
+Finally, I would like to address what I have postponed: why $\gamma(A) \geq \gamma(H)$.
+I honestly can't say it's crystal clear to me...
+but, based on what we saw in Isoperimetric Inequality, we can develop the following intuition:
 Let us view $A$ as a set of slices.
 If $A$ is a half space, then every cross-section of $A$ is Gaussian.
 
