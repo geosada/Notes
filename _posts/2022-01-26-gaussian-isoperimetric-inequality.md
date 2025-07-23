@@ -76,7 +76,7 @@ Thus, the $\epsilon$-extension of $H$, $H_{\epsilon}$, is expressed using $\Phi$
 ![$\epsilon$-extension of $H$]({{site.baseurl}}/img/GII/fig_h_expansion.png){: .centered width="400" }
 
 We apply an $\epsilon$-expansion to the whole boundary of $H$, but portions other than the depicted slice are events at infinity and can be dismissed.
-Since $H_{\epsilon}$ can be writen as $H_{\epsilon} = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a + \epsilon \\}$ and  $\Phi^{-1} ( \gamma(A)) = A$,
+Since $H_{\epsilon}$ can be writen as $H_{\epsilon} = \\{ x \in \mathbb{R}^{n}: \langle x,u \rangle \leq a + \epsilon \\}$ and  $\Phi^{-1} ( \gamma(H)) = a$,
 \\[ 
     \Phi^{-1} ( \gamma(H + \epsilon B_{n}) = a + \epsilon = \Phi^{-1} ( \gamma(H)) + \epsilon.
 \\]
