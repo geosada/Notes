@@ -41,7 +41,7 @@ where $M$ denotes the median of $f(X)$ and $X$ is a random variable following th
 ![Median of $f(X)$]({{site.baseurl}}/img/GII/fig_median_f.png){: .centered width="500" }
 
 The mountainous one on the bottom is a histogram of $f(X)$.
-Since $f(x) \leq M$, we can bound Eq.$\,$($\ref{eq:1}$) as
+Since $f(y) \leq M$, we can bound Eq.$\,$($\ref{eq:1}$) as
 \\[
      \\{ x: f(x) - M \geq \epsilon  \\} \subseteq \\{ x: f(x) -f(y) \geq \epsilon  \\} \subseteq \\{ x: d(x, A) \geq \epsilon \\}.
 \\]
