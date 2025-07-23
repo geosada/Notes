@@ -3,7 +3,7 @@ layout: post
 title: "Lipschitz Concentration and Gaussian Isoperimetric Inequality"
 ---
 We show an application of Gaussian isoperimetric inequality to concentration inequalities of Lipschitz functions.
-Note that the theorem of Gaussian Isoperimetric Inequality and its derivation are described in [this post]({{ site.baseurl }}{% post_url 2022-01-26-gaussian-isoperimetric-inequality %}).
+Gaussian Isoperimetric Inequality and its derivation are described in [this post]({{ site.baseurl }}{% post_url 2022-01-26-gaussian-isoperimetric-inequality %}).
 Suppose $ f: \mathcal{X} \mapsto \mathbb{R}$ is $L$-Lipschitz function where $\mathcal{X} \subset \mathbb{R}^n$,
 for all $x,y \in \mathcal{X}$,
 \\[
