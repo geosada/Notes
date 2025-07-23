@@ -3,7 +3,7 @@ layout: post
 title: "Application of Gaussian Isoperimetric Inequality to Machine Learning"
 ---
 We show an application of Gaussian isoperimetric inequality to machine learning.
-Specifically, we will take up this paper, ["Adversarial Examples Are a Natural Consequence of Test Error in Noise"](https://arxiv.org/pdf/1901.10513.pdf).
+Specifically, we will take up the paper ["Adversarial Examples Are a Natural Consequence of Test Error in Noise"](https://arxiv.org/pdf/1901.10513.pdf).
 As its title states,the paper argues that *"the existence of adversarial examples follows naturally from the fact that our models have nonzero test error in certain corrupted image distributions"*,
 and this assertion is derived directly from Gaussian Isoperimetric Inequality.
 Note that the theorem of Gaussian Isoperimetric Inequality and its derivation are described 
