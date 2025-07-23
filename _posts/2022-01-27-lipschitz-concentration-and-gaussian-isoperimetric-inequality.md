@@ -66,7 +66,7 @@ Applying the CDF of Gaussian $\Phi$ to both sides of Gaussian Isoperimetric Ineq
     \Phi ( \Phi^{-1} ( \gamma(A + \epsilon B))) \geq \Phi ( \Phi^{-1} ( \gamma(A)) + \epsilon ),
 \\]we obtain
 \\[
-    \gamma(A + \epsilon B) \geq \gamma(A)) + \Phi (\epsilon).
+    \gamma(A + \epsilon B) \geq \gamma(A) + \Phi (\epsilon).
 \\] 
 Thus,
 \\[
