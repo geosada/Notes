@@ -81,7 +81,7 @@ Choose $S\_{\max} = \{T \ge t\_{\max}\}$ so that $P\_{H\_0}(T \ge t\_{\max})=q$.
 = \Phi\Bigl(\Phi^{-1}(q) + \frac{\|\delta\|\_2}{\sigma}\Bigr).
 \\]
 
-## 2. Deriving Cohen et al.’s Theorem
+## Deriving Cohen et al.’s Theorem
 
 Define a base classifier $f$ and its smoothed version
 
