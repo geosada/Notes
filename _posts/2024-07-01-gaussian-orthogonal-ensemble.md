@@ -198,7 +198,7 @@ $\displaystyle\sum_{i\<j}X_{ij}^2 = \frac12\sum_{i\neq j}X_{ij}^2$.  Therefore
 -\frac{N}{4}\mathrm{tr}\bigl(X^2\bigr).
 \\]
 
-Thus, the desity is 
+Thus, the density is 
 
 \\[
 p(X)
