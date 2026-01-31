@@ -22,22 +22,21 @@ Beginning with the definition of conjugation, we introduce GOE (Gaussian Orthogo
 ### Rotation and conjugation
 
 Let $U \in O(N)$ be an orthogonal matrix and $x$ be a vector in $\mathbb{R}^{N}$.
-If we rotate the basis by $U$, a vector that was $x$ in the old basis has coordinates $x'=Ux$.
-In this rotation operation, vectors lengths and angles, i.e., dot-products, are preserved,
-$\|x'\|=\|x\|$ and $x'\cdot y' = x\cdot y$.
-A matrix $X$ represents a linear map $x\mapsto Xx$.
-Upon rotating the basis,
-conjugation $X \mapsto UXU^{T}$ is a way to see how $X$ acts in the new basis:
+If we rotate the basis by $U$, a vector that was $x$ in the old basis has coordinates $x' = Ux$ in the new basis.
+In this rotation operation, vectors lengths and angles, i.e., dot-products, are preserved, $\|x'\|=\|x\|$ and $x'\cdot y' = x\cdot y$.
+A matrix $X$ represents a linear map $x \mapsto z = Xx$.
+To see how $X$ acts in the rotated basis, we express the map in terms of the new coordinates $x'$ and $z'$:
 \\\[
-    z = Xx \rightarrow Uz = UXx.
+    z' = Uz = U(Xx).
 \\\]
-Since $x'=Ux$, $x = U^{-1}x = U^{T}x$, thus $z' = (UXU^{T})x$.
-Hence in the rotated basis the matrix of the same linear map is
-$X' = UXU^{T}$.
+Since $x' = Ux$, we have $x = U^{-1}x' = U^{T}x'$. Substituting this into the equation:
+\\\[
+    z' = U X (U^{T}x') = (UXU^{T})x'.
+\\\]
+Hence, in the rotated basis, the matrix representing the same linear map is $X' = UXU^{T}$.
 Conjugation by $U$ doesn’t change what the map does, only how you describe it in coordinates that have been rotated by $U$.
-Conjugation changes each eigenvector
-$v$ of $X$ by $Uv$, but preserves its spectrum, i.e., leave each eigenvalue $\lambda$ unchanged.
-For $X = QΛQ^{T}$, 
+Conjugation changes each eigenvector $v$ of $X$ by $Uv$, but preserves its spectrum, i.e., leave each eigenvalue $\lambda$ unchanged.
+For $X = Q\Lambda Q^{T}$, 
 \\\[
     UXU^{T} = (UQ)\Lambda(UQ)^{T},
 \\\]
