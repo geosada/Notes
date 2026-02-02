@@ -55,28 +55,34 @@ Equivalently, conjugation‐invariance says the law of $X$ depends only on its e
 Note that $\mathcal L(X)$ is a measure on all of $\mathbb{R}^{N\times N}$, not just on the eigenvalues, but because conjugation leaves eigenvalues unchanged—only the eigenvectors are rotated—orthogonal‐invariance implies the ensemble’s spectral measure (the ESD) is unchanged by any basis rotation.
 Also note that orthogonal-invariance says nothing about the dispersion of the eigenvalues themselves; it never means that all $\lambda_{i}$ are equal.
 
-In practice (e.g.\ GOE or any Wigner ensemble) the eigenvalues spread out according to a nontrivial law such as the semicircle distribution.
+In practice (e.g., GOE or any Wigner ensemble) the eigenvalues spread out according to a nontrivial law such as the semicircle distribution.
 Because of this full invariance, virtually every global spectral statistic (moments, Stieltjes transform, free convolution, etc.) depends only on the ESD of $X$ and not on any subtle eigenvector correlations.
 
 
 # Matrix isotropy
 
-The GOE is a random‐matrix ensembles.
-While a random matrix is a single matrix‐valued random variable,
-a random‐matrix ensemble is the entire family (or “ensemble”) of random matrices together with the rule for sampling them.
-Its defining law can be compactly expressed via the Frobenius inner product.
+The GOE is a random-matrix ensemble.
+While a random matrix is a single matrix-valued random variable,
+a random-matrix ensemble refers to the entire family of random matrices together with the rule for sampling them.
+Its defining law can be compactly expressed using the Frobenius inner product.
 
 ### Frobenius inner product
 
-To talk about “lengths” and “angles” (and hence isotropy), we need an inner product in general.
-The Frobenius inner product is defined as
+To discuss “lengths” and “angles” (and hence isotropy) in matrix space, we introduce an inner product.
+The Frobenius inner product between two matrices $A,B\in\mathbb{R}^{N\times N}$ is
+
 \\\[
-  \langle A,B\rangle_{F}
-  = \mathrm{tr}(A\,B)
-  = \sum_{i,j=1}^{N} A_{ij}\,B_{ij}
-  = \mathrm{vec}(A)\cdot\mathrm{vec}(B),
+  \langle A,B\rangle\_F
+  = \mathrm{tr}(A^T B)
+  = \sum_{i,j=1}^{N} A_{ij} B_{ij}
+  = \mathrm{vec}(A)\cdot \mathrm{vec}(B).
 \\\]
-which induces the norm $\|A\|\_{F} = \sqrt{\mathrm{tr}(A^{2})}$, the natural “length” of a matrix.
+For symmetric matrices ($A^T=A$), this simplifies to $\langle A,B\rangle_F=\mathrm{tr}(AB)$.
+The induced norm is
+\\\[
+  \|A\|\_{F}=\sqrt{\langle A,A\rangle\_F}=\sqrt{\mathrm{tr}(A^2)},
+\\\]
+which plays the role of the Euclidean length in matrix space.
 Using this metrics we identify $x \in \mathbb{R}^{N\times N}$ being spherical or isotropic, just like a standard multivariate normal in $\mathbb{R}^{N}$.
 The subspace of real symmetric $N\times N$ matrices has dimension
 $\frac{N(N+1)}{2}$.
@@ -86,20 +92,15 @@ A convenient orthonormal basis (w.r.t. $\langle\cdot,\cdot\rangle_{F}$) is
   \quad
   E^{(i,j)} = \frac{E_{ij}+E_{ji}}{\sqrt2}\quad(i\<j),
 \\\]
-where $E_{ij}$ has a 1 in the $(i,j)$ slot and 0 elsewhere.
-In particular, isotropy requires
-\\\[
-  \mathbb{E}\bigl[\langle X,E^{(a)}\rangle_{F}\,
-         \langle X,E^{(b)}\rangle_{F}\bigr]
-  =\sigma^{2}\,\delta_{ab}
-  \quad\forall\,a,b.
-\\\]
+where $E_{ij}$ denotes the matrix with a 1 in the $(i,j)$ entry and zeros elsewhere.
+
 
 ### Requirements of isotropy
 A multivariate Gaussian in $\mathbb{R}^{N}$ is called spherical (or isotropic) if its covariance matrix is a scalar multiple of the identity.
-Equivalently, via the $\mathrm{vec}$ map $X \mapsto \mathrm{vec}(X) \in \mathbb{R}^{N^{2}}$ (or $\mathbb{R}^{N(N+1)/2}$ for symmetric $X$), we ask:
+Equivalently, via the vectorization map $\mathrm{vec}$ map $X \mapsto \mathrm{vec}(X) \in \mathbb{R}^{N^{2}}$ (or $\mathbb{R}^{N(N+1)/2}$ for symmetric $X$), we ask:
 Is $\mathrm{vec}(X) \sim \mathcal{N}(0,\sigma^{2} \mathbb{I})$?
 If so, $X$ is an isotropic (spherical) Gaussian in matrix‐space, i.e., no preferred direction.
+
 The coordinate of $X$ in direction $E^{(a)}$ is expressed by the Frobenius inner product as
 \\[
 \langle X,\,E^{(a)}\rangle_{F}
